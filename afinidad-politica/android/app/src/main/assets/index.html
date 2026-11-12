@@ -2,14 +2,31 @@
 <html lang="es">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#171412">
-<meta name="description" content="Comparador político avanzado y cuestionario neutral sobre propuestas, medidas de gobierno, votaciones y temas de actualidad en España.">
+<meta name="description" content="Cuestionario político neutral, avanzado e imparcial sobre propuestas, medidas y temas de actualidad en España.">
 <link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg" type="image/svg+xml">
-<title>Brújula · Afinidad política y comparador</title>
+<title>Brújula · Afinidad política y cuestionario neutral</title>
 <style>
 :root{--bg:#171412;--panel:#24201d;--panel2:#302a25;--paper:#f1e8dc;--ink:#241e1a;--muted:#b9aea2;--gold:#f0b65b;--line:#4b4038;--green:#80b89a;--red:#d98d82;--blue:#8caed0;--radius:18px;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color-scheme:dark}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -20%,#423027 0,transparent 55%),var(--bg);color:var(--paper);min-height:100vh}button{font:inherit;cursor:pointer}.shell{width:min(960px,100%);margin:auto;padding:18px 16px 48px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}.brand{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:800}.main-nav{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin-bottom:20px;scrollbar-width:none}.main-nav::-webkit-scrollbar{display:none}.nav-tab{background:#211d1a;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:7px 12px;font-size:11px;font-weight:700;white-space:nowrap}.nav-tab.active{background:var(--paper);color:var(--ink);border-color:var(--paper)}.hero{padding:20px 0 16px}.eyebrow{color:var(--gold);font-size:12px;font-weight:800;letter-spacing:.15em;text-transform:uppercase}.hero h1{font-size:clamp(30px,7vw,52px);line-height:1.02;letter-spacing:-.045em;margin:10px 0 14px;max-width:720px}.hero p{color:#c9bdb0;line-height:1.55;max-width:700px;margin:0;font-size:15px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:20px 0}.feature{border:1px solid var(--line);background:#211d1a;border-radius:14px;padding:15px}.feature b{display:block;font-size:13px;margin-bottom:5px;color:var(--paper)}.feature span{font-size:12px;color:var(--muted);line-height:1.4}.btn{border:0;border-radius:12px;padding:13px 18px;font-weight:800;background:var(--gold);color:#241a11}.btn.secondary{background:transparent;color:var(--paper);border:1px solid var(--line)}.btn:disabled{opacity:.35;cursor:not-allowed}.note{border-left:3px solid var(--gold);padding:12px 14px;background:#2a241f;color:#c9bdb0;font-size:12px;line-height:1.55;border-radius:0 10px 10px 0;margin:18px 0}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.hidden{display:none!important}.progress-wrap{margin:12px 0 20px}.progress-meta{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin-bottom:9px}.track{height:6px;border-radius:99px;background:#443a32;overflow:hidden}.fill{height:100%;background:var(--gold);width:0;transition:width .2s}.topic{color:var(--gold);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}.question-count{color:var(--muted);font-size:12px}.qcard{background:var(--paper);color:var(--ink);border-radius:var(--radius);padding:clamp(20px,5vw,34px);margin:12px 0 18px;min-height:240px;display:flex;flex-direction:column;justify-content:center}.qcard .small{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#786b60;font-weight:800}.qcard h2{font-size:clamp(20px,4.5vw,30px);line-height:1.18;letter-spacing:-.025em;margin:12px 0 20px}.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.choice{border:1px solid #cfc2b4;background:#faf5ed;color:#392e25;border-radius:11px;padding:12px 4px;font-size:11px;font-weight:750;min-height:62px;text-align:center}.choice strong{display:block;font-size:17px;margin-bottom:2px}.choice small{font-size:9px;font-weight:600}.choice[aria-pressed=true]{background:#30251d;color:#fff2df;border-color:#30251d;box-shadow:0 0 0 2px #d39a4b}.skip{display:block;text-align:center;color:#75675b;background:none;border:0;text-decoration:underline;margin:14px auto 0;font-size:12px}.nav{display:flex;justify-content:space-between;gap:10px}.nav .btn{min-width:115px}.section-label{font-size:12px;color:var(--muted);margin:12px 0}.result-head{padding:22px;border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(135deg,#2d261f,#201c19)}.result-head h2{font-size:clamp(26px,5.5vw,38px);margin:8px 0}.winner{color:var(--gold)}.result-head p{color:#c9bdb0;line-height:1.5;margin-bottom:0}.chart-card{background:#211d1a;border:1px solid var(--line);border-radius:16px;padding:18px;margin:14px 0}.chart-card h3{margin:0 0 12px;font-size:15px}.bar-row{display:grid;grid-template-columns:120px 1fr 44px;gap:10px;align-items:center;margin:12px 0;font-size:12px}.bar-label{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.bar-track{height:11px;background:#453b33;border-radius:99px;overflow:hidden}.bar-fill{height:100%;border-radius:99px;background:var(--gold)}.bar-value{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}.axis{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:10px}.axis div{background:#2e2823;border-radius:9px;padding:9px 5px;text-align:center}.axis b{display:block;font-size:14px;color:var(--gold)}.axis span{display:block;font-size:9px;color:var(--muted);margin-top:4px;line-height:1.25}.answer-list{display:flex;flex-direction:column;gap:9px}.answer{border:1px solid var(--line);border-radius:12px;padding:12px;background:#211d1a}.answer-top{display:flex;justify-content:space-between;gap:12px;align-items:start}.answer .statement{font-size:13px;line-height:1.45}.tag{white-space:nowrap;border-radius:99px;padding:4px 8px;font-size:10px;font-weight:800;background:#3c3026;color:var(--gold)}.answer-meta{color:var(--muted);font-size:11px;margin-top:6px}.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0}.tab{background:transparent;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:7px 11px;font-size:11px}.tab.active{background:var(--paper);color:var(--ink);border-color:var(--paper)}.footer{color:#91857a;font-size:11px;line-height:1.55;margin-top:28px}.footer a{color:var(--gold)}.empty{color:var(--muted);font-size:13px;padding:18px 0}.mini{font-size:11px;color:var(--muted)}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -20%,#423027 0,transparent 55%),var(--bg);color:var(--paper);min-height:100vh}button{font:inherit;cursor:pointer}.shell{width:min(960px,100%);margin:auto;padding:18px 16px 48px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}.brand{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:800}.main-nav{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin-bottom:20px;scrollbar-width:none}.main-nav::-webkit-scrollbar{display:none}.nav-tab{background:#211d1a;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:7px 12px;font-size:11px;font-weight:700;white-space:nowrap}.nav-tab.active{background:var(--paper);color:var(--ink);border-color:var(--paper)}.hero{padding:20px 0 16px}.eyebrow{color:var(--gold);font-size:12px;font-weight:800;letter-spacing:.15em;text-transform:uppercase}.hero h1{font-size:clamp(30px,7vw,52px);line-height:1.02;letter-spacing:-.045em;margin:10px 0 14px;max-width:720px}.hero p{color:#c9bdb0;line-height:1.55;max-width:700px;margin:0;font-size:15px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:20px 0}.feature{border:1px solid var(--line);background:#211d1a;border-radius:14px;padding:15px}.feature b{display:block;font-size:13px;margin-bottom:5px;color:var(--paper)}.feature span{font-size:12px;color:var(--muted);line-height:1.4}.btn{border:0;border-radius:12px;padding:13px 18px;font-weight:800;background:var(--gold);color:#241a11}.btn.secondary{background:transparent;color:var(--paper);border:1px solid var(--line)}.btn:disabled{opacity:.35;cursor:not-allowed}.note{border-left:3px solid var(--gold);padding:12px 14px;background:#2a241f;color:#c9bdb0;font-size:12px;line-height:1.55;border-radius:0 10px 10px 0;margin:18px 0}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.hidden{display:none!important}.progress-wrap{margin:12px 0 20px}.progress-meta{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin-bottom:9px}.track{height:6px;border-radius:99px;background:#443a32;overflow:hidden}.fill{height:100%;background:var(--gold);width:0;transition:width .2s}.topic{color:var(--gold);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}.question-count{color:var(--muted);font-size:12px}.qcard{background:var(--paper);color:var(--ink);border-radius:var(--radius);padding:clamp(20px,5vw,34px);margin:12px 0 10px;min-height:220px;display:flex;flex-direction:column;justify-content:center}.qcard .small{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#786b60;font-weight:800}.qcard h2{font-size:clamp(19px,4.2vw,28px);line-height:1.2;letter-spacing:-.02em;margin:10px 0 18px}.scale{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}.choice{border:1px solid #cfc2b4;background:#faf5ed;color:#392e25;border-radius:11px;padding:10px 6px;font-size:11px;font-weight:750;min-height:54px;text-align:center}.choice strong{display:block;font-size:15px;margin-bottom:2px}.choice[aria-pressed=true]{background:#30251d;color:#fff2df;border-color:#30251d;box-shadow:0 0 0 2px #d39a4b}.choice-info{border:1px dashed #cfc2b4;background:#f3eae0;color:#5a4b3e;grid-column:span 3;min-height:46px}.skip-row{display:flex;justify-content:center;gap:15px;margin:12px 0 6px}.skip{background:none;border:0;color:#857567;text-decoration:underline;font-size:12px}
 
-/* Topic cards & party comparator styling */
+/* Integrated Context Panel */
+.context-panel{background:#211d1a;border:1px solid var(--line);border-radius:14px;margin:12px 0 18px;overflow:hidden}
+.context-header{padding:12px 16px;font-size:12px;color:var(--gold);cursor:pointer;display:flex;justify-content:space-between;align-items:center;background:#2a241f;font-weight:700}
+.context-body{padding:16px;font-size:13px;line-height:1.55;color:#c9bdb0;border-top:1px solid var(--line)}
+.context-body p{margin:0 0 10px}
+.context-body ul{margin:5px 0 10px 20px;padding:0}
+.context-sources{margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);font-size:11px;color:var(--gold)}
+
+.nav{display:flex;justify-content:space-between;gap:10px}.nav .btn{min-width:115px}
+.result-head{padding:22px;border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(135deg,#2d261f,#201c19)}.result-head h2{font-size:clamp(26px,5.5vw,38px);margin:8px 0}.winner{color:var(--gold)}.result-head p{color:#c9bdb0;line-height:1.5;margin-bottom:0}
+.chart-card{background:#211d1a;border:1px solid var(--line);border-radius:16px;padding:18px;margin:14px 0}.chart-card h3{margin:0 0 12px;font-size:15px}
+.bar-row{display:grid;grid-template-columns:120px 1fr 44px;gap:10px;align-items:center;margin:12px 0;font-size:12px}.bar-label{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.bar-track{height:11px;background:#453b33;border-radius:99px;overflow:hidden}.bar-fill{height:100%;border-radius:99px;background:var(--gold)}.bar-value{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
+.axis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin-top:10px}.axis div{background:#2e2823;border-radius:9px;padding:9px 8px;text-align:center}.axis b{display:block;font-size:14px;color:var(--gold)}.axis span{display:block;font-size:10px;color:var(--muted);margin-top:4px;line-height:1.25}
+.answer-list{display:flex;flex-direction:column;gap:9px}.answer{border:1px solid var(--line);border-radius:12px;padding:12px;background:#211d1a}.answer-top{display:flex;justify-content:space-between;gap:12px;align-items:start}.answer .statement{font-size:13px;line-height:1.45}.tag{white-space:nowrap;border-radius:99px;padding:4px 8px;font-size:10px;font-weight:800;background:#3c3026;color:var(--gold)}.answer-meta{color:var(--muted);font-size:11px;margin-top:6px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0}.tab{background:transparent;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:7px 11px;font-size:11px}.tab.active{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.footer{color:#91857a;font-size:11px;line-height:1.55;margin-top:28px}.footer a{color:var(--gold)}
+.mini{font-size:11px;color:var(--muted)}
+
 .topic-card{background:#211d1a;border:1px solid var(--line);border-radius:16px;padding:18px;margin:14px 0}
 .topic-card h3{margin-top:0;color:var(--gold);font-size:18px}
 .badge{display:inline-block;padding:3px 8px;border-radius:6px;font-size:10px;font-weight:800;text-transform:uppercase;margin:2px 0}
@@ -21,12 +38,12 @@
 .badge.none{background:#2b2622;color:#b9aea2;border:1px solid #453b36}
 .party-row{border-top:1px solid var(--line);padding:10px 0;margin-top:10px}
 .party-row:first-child{border-top:0;margin-top:0}
-@media(max-width:520px){.shell{padding:14px 12px 36px}.grid{grid-template-columns:1fr}.scale{gap:4px}.choice{padding:10px 2px;min-height:58px}.choice small{font-size:8px}.bar-row{grid-template-columns:92px 1fr 36px;gap:6px}.qcard{min-height:280px}}
+@media(max-width:520px){.shell{padding:14px 12px 36px}.grid{grid-template-columns:1fr}.scale{grid-template-columns:repeat(2,1fr)}.scale button:last-child{grid-span:2}.qcard{min-height:200px}}
 </style></head>
 <body><main class="shell">
 <header class="top">
   <div class="brand">BRÚJULA / POLÍTICA</div>
-  <div style="font-size:11px;color:var(--muted)">España 2026</div>
+  <div style="font-size:11px;color:var(--muted)">Versión 2.5 · Cuestionario Neutral</div>
 </header>
 
 <nav class="main-nav" id="mainNav">
@@ -41,36 +58,62 @@
 <!-- 1. HOME -->
 <section id="home">
 <div class="hero">
-  <div class="eyebrow">Comparador y cuestionario político · España</div>
-  <h1>¿Qué propone cada partido y qué ha hecho ante los problemas reales?</h1>
-  <p>Herramienta neutral para consultar individualmente las posiciones de todos los partidos sobre vivienda, pensiones, autónomos, impuestos, okupación, inmigración y economía; además de realizar el cuestionario ideológico y comparar propuestas, votaciones y gestión.</p>
+  <div class="eyebrow">Cuestionario neutral y comparador político · España</div>
+  <h1>Vota y opina con criterio propio, sin sesgos partidistas</h1>
+  <p>Cuestionario político depurado (40 preguntas clave sobre 15 dimensiones), con información contextual integrada debajo de cada pregunta, fuentes oficiales del BOE y del INE, y un comparador detallado de partidos tras completar el test. Tu progreso se guarda automáticamente en este dispositivo.</p>
 </div>
 <div class="grid">
-  <div class="feature"><b>Temas de actualidad</b><span>Fichas independientes sobre vivienda, alquiler, pensiones, autónomos, IRPF, okupación, inmigración y empleo.</span></div>
-  <div class="feature"><b>Comparador individual</b><span>Revisa qué propone, qué ha votado y qué ha aplicado cada partido sin agrupar asuntos distintos.</span></div>
-  <div class="feature"><b>Distingue qué dicen y hacen</b><span>Diferencia entre programa electoral, actividad legislativa y resultados de gestión.</span></div>
-  <div class="feature"><b>Cuestionario original</b><span>96 afirmaciones para medir afinidad y descubrir coincidencias y desacuerdos.</span></div>
+  <div class="feature"><b>Cuestionario imparcial</b><span>Sin referencias a partidos durante las preguntas. Responde según tus convicciones.</span></div>
+  <div class="feature"><b>Contexto integrado</b><span>Explicaciones neutrales, datos técnicos, legislación y fuentes oficiales bajo cada pregunta.</span></div>
+  <div class="feature"><b>Guardado automático</b><span>Continúa exactamente donde lo dejaste si cierras la aplicación o consultas información.</span></div>
+  <div class="feature"><b>Comparación posterior</b><span>Descubre tu afinidad exacta por partido, tema y dimensión tras finalizar.</span></div>
 </div>
-<div class="note"><b>Pregunta central:</b> ¿Qué propone cada partido, qué ha hecho realmente y qué piensa hacer con los problemas que más nos preocupan? Totalmente neutral, basado en fuentes oficiales (BOE, Congreso, INE, etc.).</div>
+<div id="resumeBox" class="note hidden" style="border-left-color:var(--green)"><b>Progreso guardado encontrado.</b> Tienes un cuestionario en curso. <button class="btn" id="resumeBtn" style="padding:6px 12px;font-size:12px;margin-left:10px">Continuar cuestionario</button></div>
 <div class="actions">
-  <button class="btn" id="start">Empezar cuestionario</button>
-  <button class="btn secondary" id="goTopics">Ver temas de actualidad</button>
+  <button class="btn" id="start">Empezar nuevo cuestionario</button>
+  <button class="btn secondary" id="goTopics">Temas de actualidad</button>
   <button class="btn secondary" id="goComparator">Comparador de partidos</button>
 </div>
 </section>
 
 <!-- 2. QUIZ -->
 <section id="quiz" class="hidden">
-<div class="progress-wrap"><div class="progress-meta"><span id="progressText">Pregunta 1 de 96</span><span id="progressPct">1 %</span></div><div class="track"><div class="fill" id="progressFill"></div></div></div>
-<div style="display:flex;justify-content:space-between;align-items:center"><div class="topic" id="topic">Vivienda</div><div class="question-count" id="answered">0 respondidas</div></div>
+<div class="progress-wrap">
+  <div class="progress-meta"><span id="progressText">Pregunta 1 de 40</span><span id="progressPct">3 %</span></div>
+  <div class="track"><div class="fill" id="progressFill"></div></div>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:center">
+  <div class="topic" id="topic">Economía y Fiscalidad</div>
+  <div class="question-count" id="answered">0 respondidas</div>
+</div>
+
 <div class="qcard">
-  <div class="small" id="partySource">Propuesta atribuida a…</div>
+  <div class="small" id="dimensionLabel">Dimensión: Economía</div>
   <h2 id="statement"></h2>
   <div class="scale" id="scale"></div>
-  <button class="skip" id="skip">No tengo opinión / Prefiero no responder</button>
+  <div class="skip-row">
+    <button class="skip" id="skipNeutral">Marcar como Neutral</button>
+    <button class="skip" id="skipNoInfo">No tengo suficiente información</button>
+  </div>
 </div>
-<div class="nav"><button class="btn secondary" id="prev">Anterior</button><button class="btn" id="next" disabled>Siguiente</button></div>
-<p class="mini" style="text-align:center;margin-top:15px">Puedes volver atrás y cambiar cualquier respuesta.</p>
+
+<!-- Integrated Context Panel -->
+<div class="context-panel" id="contextPanel">
+  <div class="context-header" id="contextToggle">
+    <span><b>[ CONTEXTO DE LA PREGUNTA ]</b> Explicación, situación legal y datos</span>
+    <span id="contextToggleIcon">▼</span>
+  </div>
+  <div class="context-body hidden" id="contextBody">
+    <div id="contextText"></div>
+    <div class="context-sources" id="contextSources"></div>
+  </div>
+</div>
+
+<div class="nav">
+  <button class="btn secondary" id="prev">Anterior</button>
+  <button class="btn" id="next" disabled>Siguiente</button>
+</div>
+<p class="mini" style="text-align:center;margin-top:15px">Tus respuestas se guardan automáticamente. Puedes consultar el contexto o volver atrás en cualquier momento.</p>
 </section>
 
 <!-- 3. RESULTS -->
@@ -82,11 +125,14 @@
   <div id="winnerScore" style="font-weight:800;font-size:22px"></div>
   <p id="resultSummary"></p>
 </div>
-<div class="chart-card"><h3>Afinidad por partido</h3><div id="partyChart"></div><div class="mini">Porcentaje de coincidencia entre las propuestas respondidas y tus respuestas. No equivale a probabilidad de voto.</div></div>
-<div class="chart-card"><h3>Tu mapa temático</h3><div class="axis" id="topicChart"></div></div>
+<div class="chart-card"><h3>Afinidad general por partido</h3><div id="partyChart"></div><div class="mini">Porcentaje de coincidencia ponderada entre tus respuestas y las posiciones documentadas de cada partido.</div></div>
+<div class="chart-card"><h3>Tu mapa por dimensiones políticas</h3><div class="axis" id="topicChart"></div></div>
 <div class="chart-card"><h3>Coincidencia por tema y partido</h3><div class="tabs" id="topicTabs"></div><div id="topicPartyChart"></div></div>
-<div class="chart-card"><h3>Respuesta a respuesta</h3><div class="tabs" id="answerTabs"></div><div class="answer-list" id="answerList"></div></div>
-<div class="actions"><button class="btn" id="restart">Repetir cuestionario</button><button class="btn secondary" id="export">Exportar resultados</button></div>
+<div class="chart-card"><h3>Tus respuestas y su contexto</h3><div class="tabs" id="answerTabs"></div><div class="answer-list" id="answerList"></div></div>
+<div class="actions">
+  <button class="btn" id="restart">Reiniciar cuestionario</button>
+  <button class="btn secondary" id="export">Exportar informe</button>
+</div>
 </section>
 
 <!-- 4. TOPICS SECTION (TEMAS DE ACTUALIDAD) -->
@@ -105,6 +151,7 @@
 <h2 style="font-size:24px;margin:8px 0 14px">Comparación detallada de partidos</h2>
 <p class="mini" style="margin-bottom:16px">Selecciona un tema y compara las posturas de los diferentes partidos políticos de forma clara.</p>
 <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap">
+  <label for="compareTopicSelect" class="hidden">Seleccionar tema</label>
   <select id="compareTopicSelect" style="background:var(--panel);color:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px;font:inherit"></select>
 </div>
 <div id="comparatorContent"></div>
@@ -123,12 +170,12 @@
 <div class="eyebrow">Transparencia y rigor</div>
 <h2 style="font-size:24px;margin:8px 0 14px">Fuentes oficiales y metodología</h2>
 <div class="topic-card">
-  <h3>Compromiso de neutralidad</h3>
+  <h3>Compromiso de neutralidad y versión del cuestionario</h3>
   <p style="font-size:13px;line-height:1.55;color:#c9bdb0">Esta aplicación utiliza criterios estrictamente objetivos y verificados mediante fuentes institucionales (BOE, Congreso de los Diputados, Senado, INE, Seguridad Social, ministerios competentes y programas electorales oficiales).</p>
-  <p style="font-size:13px;line-height:1.55;color:#c9bdb0">No se atribuyen opiniones o intenciones sin evidencia documental de votaciones, proposiciones de ley o declaraciones oficiales registradas.</p>
+  <p style="font-size:13px;line-height:1.55;color:#c9bdb0"><b>Versión del banco de preguntas:</b> 2.5 (Auditoría de redundancias completada, 40 preguntas independientes distribuidas en 15 dimensiones).</p>
 </div>
 </section>
 
-<footer class="footer">BRÚJULA es una herramienta informativa independiente y no está afiliada a ningún partido. Las puntuaciones son descriptivas y basadas en documentación oficial. La aplicación no guarda ni transmite datos personales.</footer>
+<footer class="footer">BRÚJULA es una herramienta informativa independiente y no está afiliada a ningún partido. Las puntuaciones son descriptivas y basadas en documentación oficial. La aplicación guarda tu progreso localmente de forma segura.</footer>
 </main>
 <script src="app.js"></script></body></html>
