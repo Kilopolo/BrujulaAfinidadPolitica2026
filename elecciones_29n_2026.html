@@ -1,0 +1,2136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="dashboard">
+  <meta name="design-style" content="briefing">
+  <title>Elecciones 29N 2026 — Comparativa Electoral Basada en Programas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+
+      /* Page and surfaces */
+      --background: #faf9f5;
+      --surface-container-low: #ffffff;
+      --surface-container: #f1efe8;
+      --surface-container-high: #e6e2d6;
+
+      /* Ink */
+      --on-surface: #17181a;
+      --on-surface-variant: #56585c;
+
+      /* Rules */
+      --outline: #17181a;
+      --outline-variant: #dedad0;
+
+      /* Accents */
+      --primary: #17181a;
+      --on-primary: #faf9f5;
+      --primary-container: #f2b705;
+      --on-primary-container: #17181a;
+      --secondary: #1f4e5f;
+      --tertiary: #785008;
+      --error: #b42318;
+      --on-error: #ffffff;
+
+      /* Semantic & status surfaces */
+      --positive: #1d5e43;
+      --positive-bg: #e7f3ed;
+      --warning: #785008;
+      --warning-bg: #f5e6c4;
+      --neutral-bg: #f1efe8;
+      --error-bg: #fbeae8;
+      --focus: #1f4e5f;
+
+      /* Data series */
+      --data-1: #1f4e5f;
+      --data-2: #d99000;
+      --data-3: #2b6e52;
+      --data-4: #b84a39;
+      --data-context: #c4bfb2;
+
+      /* Fonts */
+      --font-headline: 'Source Serif 4', serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --font-label: 'Geist Mono', monospace;
+
+      /* Shape */
+      --rounded: 0.25rem;
+      --rounded-lg: 0.375rem;
+      --rounded-full: 0.25rem;
+      --badge-radius: 2px;
+
+      /* Effects */
+      --section-rule: 1.5px solid var(--outline);
+      --card-border: 1px solid var(--outline-variant);
+      --heading-tracking: -0.02em;
+      --label-tracking: 0.08em;
+
+      /* Type scale (Dashboard) */
+      --display-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.35rem);
+      --headline-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+      --subhead-size: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+      --body-size: clamp(0.9375rem, 0.9rem + 0.15vw, 1rem);
+      --label-size: 0.75rem;
+
+      /* Spacing scale */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-micro: 120ms;
+      --dur-short: 220ms;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      overflow-x: clip;
+      margin: 0;
+      padding: 0;
+      background: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: 1.6;
+    }
+    header { position: static !important; }
+
+    :focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .page-grid {
+      display: grid;
+      gap: var(--space-lg);
+      padding: var(--space-lg);
+      max-width: 1320px;
+      margin: 0 auto;
+    }
+    .page-grid * { min-width: 0; }
+
+    /* Briefing Dossier Header */
+    .dossier-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      border-bottom: var(--section-rule);
+      padding-bottom: var(--space-sm);
+      margin-bottom: var(--space-md);
+    }
+    .dossier-left {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .dossier-pill {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.6875rem;
+      letter-spacing: var(--label-tracking);
+      text-transform: uppercase;
+      padding: 0.1875rem 0.5rem;
+      border-radius: var(--badge-radius);
+    }
+    .dossier-meta {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .title {
+      font-family: var(--font-headline);
+      font-weight: 600;
+      font-size: var(--display-size);
+      letter-spacing: var(--heading-tracking);
+      line-height: 1.08;
+      margin: 0;
+      color: var(--on-surface);
+    }
+    .standfirst {
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: var(--subhead-size);
+      color: var(--secondary);
+      margin: var(--space-xs) 0 0 0;
+      max-width: 72ch;
+    }
+
+    /* KPI Summary Strip */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr));
+      gap: var(--space-md);
+    }
+    .figure-card {
+      background: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md) var(--space-lg);
+    }
+    .figure-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--on-surface-variant);
+      margin-bottom: var(--space-xs);
+    }
+    .figure-value {
+      font-family: var(--font-headline);
+      font-weight: 600;
+      font-size: clamp(1.5rem, 1.2rem + 0.8vw, 2rem);
+      font-variant-numeric: lining-nums tabular-nums;
+      line-height: 1.1;
+      color: var(--on-surface);
+    }
+    .figure-note {
+      font-size: 0.8125rem;
+      color: var(--on-surface-variant);
+      margin-top: var(--space-xs);
+    }
+
+    /* Methodology Banner */
+    .aside-box {
+      background: var(--surface-container);
+      border-top: var(--section-rule);
+      padding: var(--space-md) var(--space-lg);
+      border-radius: 0 0 var(--rounded-lg) var(--rounded-lg);
+    }
+    .aside-box p {
+      margin: 0;
+      font-size: 0.875rem;
+      color: var(--on-surface);
+      max-width: 95ch;
+    }
+
+    /* Section Navigation */
+    .view-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      align-items: center;
+      border-bottom: var(--card-border);
+      padding-bottom: var(--space-md);
+    }
+    .nav-btn {
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.875rem;
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded);
+      border: 1px solid var(--outline-variant);
+      background: var(--surface-container-low);
+      color: var(--on-surface);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      transition: background-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out);
+    }
+    .nav-btn:hover {
+      background: var(--surface-container);
+    }
+    .nav-btn.active {
+      background: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+    }
+    .index-num {
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: var(--label-size);
+      color: var(--secondary);
+    }
+    .nav-btn.active .index-num {
+      color: var(--primary-container);
+    }
+
+    /* Section Headers */
+    .section-block {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+    .section-block[hidden] {
+      display: none;
+    }
+    .section-title {
+      font-family: var(--font-headline);
+      font-weight: 600;
+      font-size: var(--headline-size);
+      letter-spacing: var(--heading-tracking);
+      margin: 0;
+    }
+    .section-desc {
+      margin: var(--space-xs) 0 0 0;
+      color: var(--on-surface-variant);
+      max-width: 75ch;
+    }
+
+    /* Controls Bar */
+    .controls-panel {
+      background: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md) var(--space-lg);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr));
+      gap: var(--space-md);
+      align-items: end;
+    }
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .control-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--on-surface-variant);
+    }
+    .control-input, .control-select {
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      min-height: 44px;
+      padding: 0.5rem 0.75rem;
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      background: var(--surface-container-low);
+      color: var(--on-surface);
+      width: 100%;
+    }
+    .control-select {
+      padding-right: 2rem;
+    }
+    .btn-secondary {
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.875rem;
+      min-height: 44px;
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      background: var(--surface-container);
+      color: var(--on-surface);
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out);
+    }
+    .btn-secondary:hover {
+      background: var(--surface-container-high);
+    }
+
+    /* Badges & Status Pills */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--font-label);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.1875rem 0.5rem;
+      border-radius: var(--badge-radius);
+      white-space: nowrap;
+    }
+    .badge-concreta {
+      background: var(--positive-bg);
+      color: var(--positive);
+    }
+    .badge-declarativa {
+      background: var(--warning-bg);
+      color: var(--warning);
+    }
+    .badge-sin-datos {
+      background: var(--neutral-bg);
+      color: var(--on-surface-variant);
+    }
+    .badge-incompatibilidad {
+      background: var(--error-bg);
+      color: var(--error);
+    }
+    .badge-coincidencia {
+      background: var(--positive-bg);
+      color: var(--positive);
+    }
+    .badge-divergencia {
+      background: var(--warning-bg);
+      color: var(--tertiary);
+    }
+
+    /* VIEW 1: Interactive Hierarchical Concept Map */
+    .map-layout {
+      display: grid;
+      grid-template-columns: minmax(260px, 340px) minmax(0, 1fr);
+      gap: var(--space-lg);
+      align-items: start;
+    }
+    .party-tree-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    .party-node-btn {
+      width: 100%;
+      text-align: left;
+      background: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+      transition: background-color var(--dur-micro) var(--ease-out), box-shadow var(--dur-micro) var(--ease-out);
+    }
+    .party-node-btn:hover {
+      background: var(--surface-container);
+    }
+    .party-node-btn.active {
+      background: var(--surface-container-low);
+      box-shadow: inset 4px 0 0 var(--secondary);
+      border-color: var(--secondary);
+    }
+    .party-node-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .party-node-name {
+      font-family: var(--font-headline);
+      font-weight: 600;
+      font-size: 1.0625rem;
+      color: var(--on-surface);
+    }
+    .party-node-source {
+      font-family: var(--font-label);
+      font-size: 0.72rem;
+      color: var(--on-surface-variant);
+    }
+    .party-node-bars {
+      display: flex;
+      gap: 2px;
+      height: 6px;
+      width: 100%;
+      margin-top: var(--space-xs);
+      background: var(--surface-container);
+      border-radius: var(--badge-radius);
+      overflow: hidden;
+    }
+    .bar-seg-concreta { background: var(--positive); }
+    .bar-seg-declarativa { background: var(--primary-container); }
+    .bar-seg-vacio { background: var(--outline-variant); }
+
+    /* Concept Tree Inspector */
+    .concept-canvas {
+      background: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+    .tree-root-header {
+      border-bottom: var(--section-rule);
+      padding-bottom: var(--space-md);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: var(--space-md);
+    }
+    .tree-actions {
+      display: flex;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+    }
+    .branch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+      gap: var(--space-md);
+    }
+    .branch-card {
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      background: var(--background);
+      overflow: hidden;
+    }
+    .branch-trigger {
+      width: 100%;
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-md);
+      background: var(--surface-container-low);
+      border: 0;
+      border-bottom: 1px solid var(--outline-variant);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-sm);
+      cursor: pointer;
+      text-align: left;
+      color: var(--on-surface);
+      font-family: var(--font-body);
+    }
+    .branch-trigger:hover {
+      background: var(--surface-container);
+    }
+    .branch-title {
+      font-weight: 600;
+      font-size: 0.9375rem;
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .branch-body {
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      font-size: 0.875rem;
+    }
+    .branch-body[hidden] {
+      display: none;
+    }
+    .measure-item {
+      background: var(--surface-container-low);
+      border-left: 3px solid var(--secondary);
+      padding: var(--space-sm) var(--space-md);
+      border-radius: 0 var(--rounded) var(--rounded) 0;
+    }
+    .measure-item.is-declarativa {
+      border-left-color: var(--primary-container);
+    }
+    .measure-item.is-vacio {
+      border-left-color: var(--outline-variant);
+      color: var(--on-surface-variant);
+      background: var(--surface-container);
+    }
+    .measure-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+      margin-bottom: var(--space-xs);
+    }
+    .measure-title {
+      font-weight: 600;
+      color: var(--on-surface);
+    }
+    .trace-tag {
+      font-family: var(--font-label);
+      font-size: 0.72rem;
+      color: var(--secondary);
+      display: block;
+      margin-top: var(--space-xs);
+    }
+
+    /* VIEW 2: Comparative Matrix */
+    .matrix-controls-summary {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+      text-transform: uppercase;
+    }
+    .party-chips-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      align-items: center;
+    }
+    .party-chip {
+      min-height: 36px;
+      padding: 0.25rem 0.625rem;
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      background: var(--surface-container-low);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+    }
+    .party-chip.selected {
+      background: var(--secondary);
+      color: var(--on-primary);
+      border-color: var(--secondary);
+    }
+    .matrix-scroll {
+      overflow-x: auto;
+      background: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+    }
+    table.comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 880px;
+      font-size: 0.875rem;
+    }
+    table.comp-table th {
+      background: var(--surface-container);
+      border-bottom: var(--section-rule);
+      padding: var(--space-sm) var(--space-md);
+      text-align: left;
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--on-surface);
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      vertical-align: bottom;
+    }
+    table.comp-table td {
+      border-bottom: 1px solid var(--outline-variant);
+      border-right: 1px solid var(--outline-variant);
+      padding: var(--space-md);
+      vertical-align: top;
+      min-width: 240px;
+    }
+    table.comp-table td:first-child,
+    table.comp-table th:first-child {
+      position: sticky;
+      left: 0;
+      background: var(--surface-container);
+      z-index: 1;
+      min-width: 170px;
+      max-width: 200px;
+      font-weight: 600;
+      border-right: var(--section-rule);
+    }
+    table.comp-table th:first-child {
+      z-index: 3;
+    }
+    .cell-stack {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    .cell-entry {
+      padding-bottom: var(--space-sm);
+      border-bottom: 1px dashed var(--outline-variant);
+    }
+    .cell-entry:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+    .cell-empty {
+      color: var(--on-surface-variant);
+      font-style: italic;
+      font-size: 0.8125rem;
+    }
+
+    /* VIEW 3: Axes of Debate, Consensus & Incompatibilities */
+    .axes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr));
+      gap: var(--space-lg);
+    }
+    .axis-card {
+      background: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+    .axis-header {
+      border-bottom: var(--section-rule);
+      padding-bottom: var(--space-sm);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: var(--space-sm);
+    }
+    .axis-title {
+      font-family: var(--font-headline);
+      font-weight: 600;
+      font-size: 1.1875rem;
+      margin: 0;
+    }
+    .stance-row {
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      padding: var(--space-sm) var(--space-md);
+      background: var(--background);
+    }
+    .stance-type {
+      font-family: var(--font-label);
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: var(--space-xs);
+      display: inline-block;
+    }
+    .stance-parties {
+      font-weight: 700;
+      color: var(--secondary);
+      font-size: 0.875rem;
+    }
+    .incompat-box {
+      background: var(--error-bg);
+      border-left: 3px solid var(--error);
+      padding: var(--space-sm) var(--space-md);
+      border-radius: 0 var(--rounded) var(--rounded) 0;
+      font-size: 0.875rem;
+    }
+    .incompat-title {
+      font-weight: 700;
+      color: var(--error);
+      display: block;
+      margin-bottom: var(--space-xs);
+    }
+
+    /* Coverage Chart Panel */
+    .coverage-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+      gap: var(--space-md);
+    }
+    .coverage-row {
+      display: grid;
+      grid-template-columns: 140px 1fr 48px;
+      align-items: center;
+      gap: var(--space-sm);
+      font-size: 0.8125rem;
+    }
+    .cov-bar-track {
+      height: 10px;
+      background: var(--surface-container);
+      border-radius: var(--badge-radius);
+      overflow: hidden;
+      display: flex;
+    }
+    .cov-val {
+      font-family: var(--font-label);
+      font-variant-numeric: tabular-nums;
+      text-align: right;
+      color: var(--on-surface-variant);
+    }
+
+    .footer-note {
+      border-top: var(--section-rule);
+      padding-top: var(--space-md);
+      font-size: 0.8125rem;
+      color: var(--on-surface-variant);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: var(--space-md);
+    }
+
+    @media (max-width: 900px) {
+      .map-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 640px) {
+      .page-grid {
+        padding: var(--space-md);
+        gap: var(--space-md);
+      }
+      .coverage-row {
+        grid-template-columns: 110px 1fr 42px;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-grid">
+    <header>
+      <div class="dossier-bar">
+        <div class="dossier-left">
+          <span class="dossier-pill">Dossier Electoral 29N</span>
+          <span class="dossier-meta">Análisis documental · 9 programas · 12 materias</span>
+        </div>
+        <span class="dossier-meta">Fecha de consulta: 23 Nov 2026</span>
+      </div>
+      <h1 class="title">Comparativa de Programas Electorales — Elecciones 29N 2026</h1>
+      <p class="standfirst">
+        Explorador neutral y verificable de propuestas programáticas extraídas literalmente de los documentos fuente, con distinción entre medidas con mecanismo concreto, declaraciones generales y materias sin desarrollo en el texto disponible.
+      </p>
+    </header>
+
+    <section class="kpi-grid" aria-label="Resumen cuantitativo del corpus documental">
+      <article class="figure-card">
+        <div class="figure-label">Formaciones analizadas</div>
+        <div class="figure-value" id="kpi-parties">9</div>
+        <div class="figure-note">Adelante Andalucía, BNG, EH Bildu, Frente Amplio, Junts, PNV, Podemos, PSOE y Vox</div>
+      </article>
+      <article class="figure-card">
+        <div class="figure-label">Materias comparadas</div>
+        <div class="figure-value">12</div>
+        <div class="figure-note">Economía, Fiscalidad, Vivienda, Empleo, Sanidad, Educación, Pensiones, Inmigración, Seguridad, Modelo territorial, Energía y Derechos sociales</div>
+      </article>
+      <article class="figure-card">
+        <div class="figure-label">Propuestas concretas</div>
+        <div class="figure-value" id="kpi-concrete">—</div>
+        <div class="figure-note">Medidas con ley, cifra, plazo o mecanismo operativo explícito en los extractos</div>
+      </article>
+      <article class="figure-card">
+        <div class="figure-label">Declaraciones / Índices</div>
+        <div class="figure-value" id="kpi-general">—</div>
+        <div class="figure-note">Principios generales o menciones de índice sin desarrollo normativo en el extracto</div>
+      </article>
+    </section>
+
+    <aside class="aside-box" aria-label="Criterio metodológico y trazabilidad">
+      <p>
+        <strong>Regla de rigor documental:</strong> cada ficha remite exactamente al archivo PDF de origen y a la sección, propuesta o página contenida en los extractos analizados. Cuando un extracto no incluye propuestas sobre una materia —o únicamente reproduce el índice general, como ocurre en el extracto de <em>vox_2026.pdf</em>—, se indica de forma expresa sin inferir ni completar medidas externas.
+      </p>
+    </aside>
+
+    <nav class="view-nav" aria-label="Vistas principales de análisis">
+      <button type="button" class="nav-btn active" id="tab-mapa" onclick="switchView('mapa')">
+        <span class="index-num">01</span> Mapa Conceptual General
+      </button>
+      <button type="button" class="nav-btn" id="tab-matriz" onclick="switchView('matriz')">
+        <span class="index-num">02</span> Matriz Comparativa Detallada
+      </button>
+      <button type="button" class="nav-btn" id="tab-ejes" onclick="switchView('ejes')">
+        <span class="index-num">03</span> Diferencias, Coincidencias e Incompatibilidades
+      </button>
+    </nav>
+
+    <!-- SECCIÓN 1: MAPA CONCEPTUAL GENERAL -->
+    <section id="view-mapa" class="section-block" aria-labelledby="heading-mapa">
+      <div>
+        <h2 class="section-title" id="heading-mapa">01 · Mapa conceptual jerárquico por formación y materia</h2>
+        <p class="section-desc">
+          Selecciona un nodo de partido para desplegar sus 12 ramas temáticas. Cada rama clasifica los contenidos disponibles en propuestas concretas (datos, plazos, leyes), declaraciones de intenciones generales o ausencia de propuestas en el extracto.
+        </p>
+      </div>
+
+      <div class="map-layout">
+        <div class="party-tree-list" id="party-tree-list" role="list" aria-label="Nodos de partidos políticos"></div>
+        <div class="concept-canvas" id="concept-canvas" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: MATRIZ COMPARATIVA DETALLADA -->
+    <section id="view-matriz" class="section-block" aria-labelledby="heading-matriz" hidden>
+      <div>
+        <h2 class="section-title" id="heading-matriz">02 · Matriz comparativa simultánea en las 12 materias</h2>
+        <p class="section-desc">
+          Compara los 9 programas de forma simultánea. Filtra por materia, nivel de concreción o texto libre, y activa o desactiva columnas de partidos para contrastar mecanismos, cifras, plazos y trazabilidad documental.
+        </p>
+      </div>
+
+      <div class="controls-panel">
+        <div class="control-group">
+          <label class="control-label" for="filter-topic">Filtrar por materia</label>
+          <select id="filter-topic" class="control-select" onchange="renderMatrix()">
+            <option value="all">Todas las materias (12)</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="filter-type">Nivel de concreción</label>
+          <select id="filter-type" class="control-select" onchange="renderMatrix()">
+            <option value="all">Todos los niveles</option>
+            <option value="concreta">Solo propuestas concretas</option>
+            <option value="declarativa">Solo declaraciones / sin desarrollo</option>
+            <option value="sin_datos">Solo materias sin propuesta en extracto</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="filter-search">Buscar palabra clave o cifra</label>
+          <input type="search" id="filter-search" class="control-input" placeholder="Ej.: 40%, 32 horas, PIB, IBI, ENCE…" oninput="renderMatrix()">
+        </div>
+        <div class="control-group">
+          <button type="button" class="btn-secondary" onclick="resetMatrixFilters()">Restablecer filtros</button>
+        </div>
+      </div>
+
+      <div class="party-chips-bar" id="matrix-party-chips" aria-label="Selector de partidos visibles en la matriz"></div>
+      <div class="matrix-controls-summary" id="matrix-status"></div>
+
+      <div class="matrix-scroll">
+        <table class="comp-table" id="comp-table">
+          <thead id="matrix-head"></thead>
+          <tbody id="matrix-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 3: MAPA DE DIFERENCIAS Y COINCIDENCIAS -->
+    <section id="view-ejes" class="section-block" aria-labelledby="heading-ejes" hidden>
+      <div>
+        <h2 class="section-title" id="heading-ejes">03 · Mapa de coincidencias, divergencias e incompatibilidades</h2>
+        <p class="section-desc">
+          Agrupación transversal por grandes ejes de debate público presentes en los documentos fuente. Se identifican consensos parciales, matices de diseño, posturas contrapuestas e incompatibilidades técnicas o normativas directas.
+        </p>
+      </div>
+
+      <div class="figure-card">
+        <div class="figure-label">Cobertura documental por partido en las 12 materias (según extractos disponibles)</div>
+        <div class="coverage-grid" id="coverage-chart"></div>
+        <div class="figure-note">Verde: materias con al menos una propuesta concreta · Amarillo: solo mención general o índice · Gris: materia no abordada en el extracto.</div>
+      </div>
+
+      <div class="controls-panel">
+        <div class="control-group">
+          <label class="control-label" for="filter-axis-type">Filtrar ejes de debate</label>
+          <select id="filter-axis-type" class="control-select" onchange="renderAxes()">
+            <option value="all">Todos los ejes transversales (8)</option>
+            <option value="incompatibilidad">Con incompatibilidad normativa/técnica directa</option>
+            <option value="coincidencia">Con coincidencias parciales entre partidos</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="axes-grid" id="axes-grid"></div>
+    </section>
+
+    <footer class="footer-note">
+      <span>Fuentes documentales: adelante_andalucia_2026.pdf · bng_2026.pdf · eh_bildu_2026.pdf · frente_amplio_2026.pdf · junts_2026.pdf · pnv_2026.pdf · podemos_2026.pdf · psoe_2026.pdf · vox_2026.pdf</span>
+      <span>Análisis neutral sin recomendaciones de voto ni etiquetas ideológicas.</span>
+    </footer>
+  </div>
+
+  <script>
+    const TOPICS = [
+      { id: `economia`, label: `Economía` },
+      { id: `fiscalidad`, label: `Fiscalidad` },
+      { id: `vivienda`, label: `Vivienda` },
+      { id: `empleo`, label: `Empleo` },
+      { id: `sanidad`, label: `Sanidad` },
+      { id: `educacion`, label: `Educación` },
+      { id: `pensiones`, label: `Pensiones` },
+      { id: `inmigracion`, label: `Inmigración` },
+      { id: `seguridad`, label: `Seguridad` },
+      { id: `territorial`, label: `Modelo territorial` },
+      { id: `energia`, label: `Energía` },
+      { id: `derechos`, label: `Derechos sociales` }
+    ];
+
+    const PARTIES = [
+      {
+        id: `adelante`,
+        name: `Adelante Andalucía`,
+        file: `adelante_andalucia_2026.pdf`,
+        scopeNote: `El extracto recoge medidas seleccionadas ("Las 29 del 29N", Área 01 y Área 02, propuestas sanitarias 9–11 y de infraestructuras 649–651).`,
+        topics: {
+          economia: [
+            {
+              type: `concreta`,
+              title: `Plan de protección del pequeño trabajo autónomo`,
+              detail: `Cuota según ingresos reales y no por tramos; cuota bonificada en vacaciones y bonificada al 100 % durante permisos por nacimiento y cuidado; ventanilla única y asesoría pública gratuita para trámites, contabilidad y facturación.`,
+              trace: `adelante_andalucia_2026.pdf · Medida 8 de 29 ("Las 29 del 29N")`
+            },
+            {
+              type: `concreta`,
+              title: `Desdoble ferroviario y mejora viaria Cádiz–Sevilla / Janda`,
+              detail: `Duplicar plazas en hora punta de media distancia Cádiz–Sevilla y carril BUS-VAO en CA-35; Cercanías Arcos–Jerez, recuperación de línea Jerez–Almargen y desdoble Arcos–Antequera con la Junta; autovía A-48 Vejer–Tarifa y N-340 Algeciras–Tarifa en 2+1.`,
+              trace: `adelante_andalucia_2026.pdf · Propuestas 649, 650 y 651`
+            }
+          ],
+          fiscalidad: [
+            {
+              type: `concreta`,
+              title: `Revolución fiscal progresiva y a beneficios extraordinarios`,
+              detail: `Impuesto a grandes fortunas y terratenientes; rebaja de IRPF para rentas bajas y subida fuerte desde 100.000 €/año; impuestos permanentes a beneficios extraordinarios de banca y eléctricas.`,
+              trace: `adelante_andalucia_2026.pdf · Medida 7 de 29 (Propuestas 232, 233 y 236 · Área 02)`
+            },
+            {
+              type: `concreta`,
+              title: `Impuesto sobre beneficios de conciertos sanitarios privados`,
+              detail: `Gravamen sobre los beneficios que la sanidad privada obtiene de conciertos públicos, destinado íntegramente a investigación pública contra el cáncer.`,
+              trace: `adelante_andalucia_2026.pdf · Medida 12 de 29 (Propuesta 242 · Área 02)`
+            }
+          ],
+          vivienda: [],
+          empleo: [
+            {
+              type: `concreta`,
+              title: `Prohibición del turno partido sin rebaja salarial`,
+              detail: `Fin del turno partido por ley manteniendo íntegro el salario para evitar que la jornada laboral ocupe todo el día.`,
+              trace: `adelante_andalucia_2026.pdf · Medida 5 de 29 (Propuestas 268 y 283 · Área 02)`
+            },
+            {
+              type: `concreta`,
+              title: `Indexación legal de salarios y SMI a la inflación`,
+              detail: `Vinculación obligatoria por ley de salarios y salario mínimo a la evolución de los precios (inflación).`,
+              trace: `adelante_andalucia_2026.pdf · Medida 6 de 29 (Propuestas 269 y 270 · Área 02)`
+            }
+          ],
+          sanidad: [
+            {
+              type: `concreta`,
+              title: `Ley de garantías en Atención Primaria y Salud Mental`,
+              detail: `Cita en atención primaria en máximo 48 horas con al menos 10 minutos por consulta; psicología en primaria y cita en salud mental en máximo 15 días desde la derivación.`,
+              trace: `adelante_andalucia_2026.pdf · Medida 13 de 29 (Área 01 Servicios públicos, Propuestas 1 a 5)`
+            },
+            {
+              type: `concreta`,
+              title: `Suelos de inversión sanitaria y Plan 20.000`,
+              detail: `Fijar por ley un suelo del 25 % del presupuesto sanitario para Atención Primaria y 2 % para salud pública; centro de especialidades en cada municipio de más de 20.000 habitantes cofinanciado por el Estado.`,
+              trace: `adelante_andalucia_2026.pdf · Propuestas 9 y 10`
+            },
+            {
+              type: `concreta`,
+              title: `Tiempos máximos garantizados en todo el Estado`,
+              detail: `Máximo de 30 días para primera consulta de especialista, 15 días para prueba diagnóstica y 120 días para operarse, con publicación mensual de listas y dimensionamiento público de plantillas.`,
+              trace: `adelante_andalucia_2026.pdf · Propuesta 11`
+            }
+          ],
+          educacion: [],
+          pensiones: [],
+          inmigracion: [],
+          seguridad: [],
+          territorial: [
+            {
+              type: `declarativa`,
+              title: `Cofinanciación y coordinación Estado–Junta sin modelo institucional desarrollado`,
+              detail: `Menciona cofinanciación estatal para centros de especialidades (Plan 20.000) y coordinación con la Junta en el desdoble Arcos–Antequera; el extracto no desarrolla una reforma del modelo territorial.`,
+              trace: `adelante_andalucia_2026.pdf · Propuestas 10 y 650 (mención transversal)`
+            }
+          ],
+          energia: [],
+          derechos: []
+        }
+      },
+      {
+        id: `bng`,
+        name: `BNG`,
+        file: `bng_2026.pdf`,
+        scopeNote: `El extracto contiene únicamente un bloque sobre litoral, medio marino, rías gallegas, ENCE, Foxa Atlántica y propiedad comunal del monte.`,
+        topics: {
+          economia: [
+            {
+              type: `declarativa`,
+              title: `Protección del complejo mar-industria tradicional y sostenible`,
+              detail: `Revisión del deslinde del Dominio Público Marítimo Terrestre (DPMT) atendiendo a las actividades tradicionales y sostenibles del complejo mar-industria gallego; sin cifras ni instrumentos económicos detallados en el extracto.`,
+              trace: `bng_2026.pdf · Bloque litoral y medio marino (párrafo inicial)`
+            }
+          ],
+          fiscalidad: [],
+          vivienda: [],
+          empleo: [],
+          sanidad: [],
+          educacion: [],
+          pensiones: [],
+          inmigracion: [],
+          seguridad: [],
+          territorial: [
+            {
+              type: `concreta`,
+              title: `Transferencia de competencias y recursos hidráulicos a Galiza`,
+              detail: `Transferir a Galiza recursos y capacidad plena para planificación, diseño, aprobación y ejecución de infraestructuras hidráulicas hoy atribuidas al Gobierno central.`,
+              trace: `bng_2026.pdf · Bloque litoral y medio marino, punto 3`
+            },
+            {
+              type: `concreta`,
+              title: `Modificación del Código Civil para el monte comunal`,
+              detail: `Reforma del Código Civil para reconocer expresamente la propiedad comunal/colectiva del monte como realidad jurídica distinta de la pública y la privada, incluyendo el monte comunal dentro del DPMT.`,
+              trace: `bng_2026.pdf · Bloque 5 (Monte e política forestal) y punto 1 litoral`
+            }
+          ],
+          energia: [
+            {
+              type: `concreta`,
+              title: `Inspección de residuos nucleares en la Foxa Atlántica`,
+              detail: `Demandar un programa permanente de inspección y seguimiento del estado y seguridad del vertedero de 140.000 toneladas de residuos nucleares situado a 600 km de la costa gallega.`,
+              trace: `bng_2026.pdf · Bloque litoral y medio marino, punto 6`
+            }
+          ],
+          derechos: [
+            {
+              type: `concreta`,
+              title: `Derogación de la prórroga de ENCE y regeneración de rías`,
+              detail: `Revisar y derogar la prórroga a ENCE en la ría de Pontevedra por contravenir normativa de Costas, directiva europea de servicios y POL; recuperar terrenos del ENIL Xunqueira do Alba, crear red de bases anticontaminación y saneamiento separativo de rías.`,
+              trace: `bng_2026.pdf · Bloque litoral y medio marino, puntos 2, 3, 4 y 5`
+            }
+          ]
+        }
+      },
+      {
+        id: `eh_bildu`,
+        name: `EH Bildu`,
+        file: `eh_bildu_2026.pdf`,
+        scopeNote: `El extracto recoge exclusivamente el apartado "1.2. Empleo". Las restantes 11 materias no aparecen desarrolladas en este extracto.`,
+        topics: {
+          economia: [],
+          fiscalidad: [],
+          vivienda: [],
+          empleo: [
+            {
+              type: `concreta`,
+              title: `Jornada de 32 horas / 4 días sin reducción salarial`,
+              detail: `Reforma del Estatuto de los Trabajadores para establecer jornada de 32 horas semanales o 4 días sin rebaja salarial. Transición para micro, pequeñas y medianas empresas: inicio en 35 horas y senda progresiva máxima de 3 años hasta 32 h.`,
+              trace: `eh_bildu_2026.pdf · Sección 1.2. Empleo, punto 1`
+            },
+            {
+              type: `concreta`,
+              title: `SMI propio por CCAA vinculado a la Carta Social Europea`,
+              detail: `Modificar el Estatuto de los Trabajadores para que las CCAA fijen su propio SMI adaptado a su realidad socioeconómica (siendo el estatal el mínimo indisponible), tomando como parámetro legal de suficiencia la Carta Social Europea y prohibiendo la absorción por pluses o complementos.`,
+              trace: `eh_bildu_2026.pdf · Sección 1.2. Empleo, punto 2`
+            },
+            {
+              type: `concreta`,
+              title: `Despido improcedente de 45 días, salarios de tramitación y autorización de ERE`,
+              detail: `Restablecer indemnización mínima de 45 días por despido improcedente (resolución del Comité Europeo de Derechos Sociales), recuperar salarios de tramitación y exigir autorización previa de la autoridad laboral en los ERE.`,
+              trace: `eh_bildu_2026.pdf · Sección 1.2. Empleo, punto 2 (subapartado medidas pendientes)`
+            },
+            {
+              type: `concreta`,
+              title: `Control de horas extras y límite al periodo de prueba`,
+              detail: `Registro horario digital obligatorio accesible a Inspección de Trabajo y recargo legal de horas extras; límite supletorio al periodo de prueba de máximo 3 meses para técnicos titulados y 1 mes para el resto.`,
+              trace: `eh_bildu_2026.pdf · Sección 1.2. Empleo, puntos 3 y 4`
+            },
+            {
+              type: `concreta`,
+              title: `Inclusión laboral de personas con discapacidad y refuerzo administrativo`,
+              detail: `Cumplimiento efectivo de la cuota de reserva de empleo en empresas (Observación General nº 8), puestos accesibles y refuerzo de plantillas de la administración laboral para tramitación presencial y electrónica de prestaciones.`,
+              trace: `eh_bildu_2026.pdf · Sección 1.2. Empleo, puntos 5 y 6`
+            }
+          ],
+          sanidad: [],
+          educacion: [],
+          pensiones: [],
+          inmigracion: [],
+          seguridad: [],
+          territorial: [
+            {
+              type: `concreta`,
+              title: `Competencia autonómica para fijar SMI propio`,
+              detail: `Descentralización normativa mediante reforma del Estatuto de los Trabajadores para habilitar a las CCAA a establecer un SMI propio por encima del mínimo estatal.`,
+              trace: `eh_bildu_2026.pdf · Sección 1.2. Empleo, punto 2`
+            }
+          ],
+          energia: [],
+          derechos: []
+        }
+      },
+      {
+        id: `frente_amplio`,
+        name: `Frente Amplio`,
+        file: `frente_amplio_2026.pdf`,
+        scopeNote: `El extracto incluye portada/título de vivienda (01), apartado 2.4 de sanidad, bloque fiscal (SICAV, tasa Google, Sociedades, Juego) y apartado 3.5 de fiscalidad verde y lujo.`,
+        topics: {
+          economia: [
+            {
+              type: `concreta`,
+              title: `Impuesto a transacciones financieras especulativas`,
+              detail: `Ampliación del impuesto sobre transacciones financieras: 0,1 % a renta fija privada, 0,2 % a acciones y 0,3 % a derivados financieros.`,
+              trace: `frente_amplio_2026.pdf · Sección 3.5 Fiscalidad verde y sobre el lujo`
+            }
+          ],
+          fiscalidad: [
+            {
+              type: `concreta`,
+              title: `Tasa Google al 15 %, reforma SICAV y Juego`,
+              detail: `Subida del Impuesto sobre Servicios Digitales al 15 % a multinacionales tecnológicas; tope de concentración accionarial en SICAV y límite de 4 años para plusvalías acumuladas; tipo del 10 % sobre cantidad bruta apostada en actividades de juego; recorte de bonificación del 95 % en ITPyAJD (CIMI).`,
+              trace: `frente_amplio_2026.pdf · Bloque fiscal (previo a 3.5)`
+            },
+            {
+              type: `concreta`,
+              title: `Supresión de bonificación en Sociedades al alquiler no asequible`,
+              detail: `Eliminación de la bonificación del 40 % en el Impuesto sobre Sociedades para rentas del alquiler salvo inmuebles destinados a alquiler asequible, más subida fiscal a viviendas no usadas como residencia permanente.`,
+              trace: `frente_amplio_2026.pdf · Bloque fiscal y Sección 3.5`
+            },
+            {
+              type: `concreta`,
+              title: `Fiscalidad verde, sobre el lujo y minería extractiva`,
+              detail: `Gravamen ambiental sobre jets privados, yates y coches de lujo; impuesto a actividades mineras extractivas en ~2.800 explotaciones (+470 M€/año); gravamen al queroseno de vuelos nacionales, equiparación del diésel, subida del tabaco, coeficiente municipal de vehículos hasta 2,5 para >120 g/km o sin etiqueta, y deducción de 3 años en IRPF por rehabilitación energética.`,
+              trace: `frente_amplio_2026.pdf · Sección 3.5 Fiscalidad verde y sobre el lujo`
+            }
+          ],
+          vivienda: [
+            {
+              type: `declarativa`,
+              title: `Parque público y asequible mayoritariamente en alquiler`,
+              detail: `Título de sección ("01 Acabar con la especulación y garantizar el derecho a la vivienda" y "1.1. Un gran parque público y asequible de vivienda mayoritariamente en alquiler") sin desarrollo de medidas en el extracto, salvo el incentivo fiscal en Sociedades del bloque tributario.`,
+              trace: `frente_amplio_2026.pdf · Sección 01 / 1.1 (solo enunciado en extracto)`
+            }
+          ],
+          empleo: [],
+          sanidad: [
+            {
+              type: `concreta`,
+              title: `Blindaje del 8 % del PIB y 25 % para Atención Primaria`,
+              detail: `Compromiso presupuestario desde los PGE del 8 % del PIB estatal para sanidad pública y refuerzo de fondos finalistas para alcanzar el 25 % del presupuesto sanitario en Atención Primaria (recomendación OMS).`,
+              trace: `frente_amplio_2026.pdf · Sección 2.4 Una sanidad pública más fuerte`
+            },
+            {
+              type: `concreta`,
+              title: `Ley de Gestión Pública, derogación de Ley 15/1997 e internalización`,
+              detail: `Derogación expresa de la Ley 15/1997 para consagrar la gestión pública directa; gestión indirecta solo excepcional tras evaluación técnica; plan de reversión e internalización paulatina de servicios privatizados y blindaje legal de la universalidad con independencia del estatus administrativo.`,
+              trace: `frente_amplio_2026.pdf · Sección 2.4 Financiación, gobernanza y gestión`
+            }
+          ],
+          educacion: [],
+          pensiones: [],
+          inmigracion: [
+            {
+              type: `concreta`,
+              title: `Universalidad sanitaria sin requisito de estatus administrativo`,
+              detail: `Blindaje por ley de la atención sanitaria universal para todas las personas residentes en España independientemente de su situación administrativa.`,
+              trace: `frente_amplio_2026.pdf · Sección 2.4 (último punto del extracto)`
+            }
+          ],
+          seguridad: [],
+          territorial: [],
+          energia: [
+            {
+              type: `concreta`,
+              title: `Tipo 0 % a producción renovable y tasa a especulación de permisos`,
+              detail: `Reducción al 0 % del Impuesto sobre producción eléctrica para renovables con compensación económica a «zonas de sacrificio ambiental» por grandes parques eólicos y fotovoltaicos; gravamen a plusvalías por venta de instalaciones antes de 1 año y a transacciones especulativas de permisos de acceso.`,
+              trace: `frente_amplio_2026.pdf · Sección 3.5 Fiscalidad verde y sobre el lujo`
+            }
+          ],
+          derechos: []
+        }
+      },
+      {
+        id: `junts`,
+        name: `Junts`,
+        file: `junts_2026.pdf`,
+        scopeNote: `El extracto contiene únicamente los puntos 2 a 5 previos al epígrafe "4. Punts de programa", centrados en bienestar, dependencia y familias.`,
+        topics: {
+          economia: [],
+          fiscalidad: [
+            {
+              type: `declarativa`,
+              title: `Medidas fiscales de apoyo a infancia, familias y discapacidad`,
+              detail: `Mención general a medidas económicas, fiscales y de derechos para reforzar la protección de la infancia, las familias y las personas con discapacidad, sin especificar tributos ni cuantías en el extracto.`,
+              trace: `junts_2026.pdf · Punto 4 (previo a "4. Punts de programa")`
+            }
+          ],
+          vivienda: [],
+          empleo: [],
+          sanidad: [],
+          educacion: [],
+          pensiones: [],
+          inmigracion: [],
+          seguridad: [],
+          territorial: [
+            {
+              type: `declarativa`,
+              title: `Corresponsabilidad financiera entre administraciones en bienestar`,
+              detail: `Asegurar financiación suficiente y eficiencia en políticas de bienestar bajo el principio de corresponsabilidad entre administraciones, sin detallar fórmula de reparto en el extracto.`,
+              trace: `junts_2026.pdf · Punto 5`
+            }
+          ],
+          energia: [],
+          derechos: [
+            {
+              type: `declarativa`,
+              title: `Despliegue de dependencia, garantía de ingresos e inclusión`,
+              detail: `Garantizar despliegue y financiación efectiva de la reforma de dependencia, cuidados y autonomía personal; hacer más preventivas y accesibles las políticas de garantía de ingresos e inclusión social; reforzar protección de infancia, familias y discapacidad. Carece de cuantías o plazos en el extracto.`,
+              trace: `junts_2026.pdf · Puntos 2, 3 y 4`
+            }
+          ]
+        }
+      },
+      {
+        id: `pnv`,
+        name: `PNV`,
+        file: `pnv_2026.pdf`,
+        scopeNote: `El extracto recoge párrafos introductorios sobre vivienda y empleo/FP, la sección 1.4 de Educación y los puntos 02–04 de competencias, bilateralidad y Derechos Históricos.`,
+        topics: {
+          economia: [],
+          fiscalidad: [],
+          vivienda: [
+            {
+              type: `declarativa`,
+              title: `Más construcción, rehabilitación, pisos vacíos y seguridad jurídica`,
+              detail: `Aumentar construcción y rehabilitación, movilizar pisos vacíos ofreciendo seguridad a personas propietarias y evitar contratos que esquiven garantías de inquilinos. No incluye cifras ni leyes específicas en el extracto.`,
+              trace: `pnv_2026.pdf · Bloque introductorio de vivienda`
+            }
+          ],
+          empleo: [
+            {
+              type: `declarativa`,
+              title: `Salarios adaptados al coste de vida y conexión con Formación Profesional`,
+              detail: `Defender salarios adaptados al coste de vida, condiciones laborales dignas y formación conectada con el empleo mediante Educación y FP. Sin mecanismos cuantificados en el extracto.`,
+              trace: `pnv_2026.pdf · Bloque introductorio de empleo`
+            }
+          ],
+          sanidad: [],
+          educacion: [
+            {
+              type: `declarativa`,
+              title: `Preservación de competencias educativas vascas y modelo plurilingüe`,
+              detail: `Evitar interferencias estatales en las competencias educativas de Euskadi e impulsar una educación inclusiva, plurilingüe e intercultural que garantice igualdad de oportunidades.`,
+              trace: `pnv_2026.pdf · Sección 1.4, puntos 01 y 02`
+            }
+          ],
+          pensiones: [],
+          inmigracion: [],
+          seguridad: [],
+          territorial: [
+            {
+              type: `concreta`,
+              title: `Mecanismos bilaterales Euskadi–Estado y defensa competencial`,
+              detail: `Rechazar cualquier recentralización, invasión o vaciamiento competencial (legislativo, administrativo o presupuestario); establecer mecanismos bilaterales de negociación y seguimiento de acuerdos; proteger Derechos Históricos y reconocimiento nacional de Euskadi.`,
+              trace: `pnv_2026.pdf · Puntos 02, 03 y 04 (Relación bilateral y Derechos Históricos)`
+            }
+          ],
+          energia: [],
+          derechos: []
+        }
+      },
+      {
+        id: `podemos`,
+        name: `Podemos`,
+        file: `podemos_2026.pdf`,
+        scopeNote: `El extracto incluye medidas numeradas concretas: 1–4 (vivienda), 52–63 (fiscalidad), 121–124 (empleo), 162–168 (igualdad/derechos), 205–207 (migración), 281–282 (educación) y 302–303 (sanidad).`,
+        topics: {
+          economia: [
+            {
+              type: `concreta`,
+              title: `Derogación del art. 135 CE y producción pública de fármacos`,
+              detail: `Reversión de la reforma del art. 135 de la Constitución para eliminar la prioridad del pago de deuda sobre el gasto social; reforma legislativa compatible con derecho europeo para producir públicamente medicamentos con patentes de coste excesivo.`,
+              trace: `podemos_2026.pdf · Medidas 62 y 301/previa a 302`
+            }
+          ],
+          fiscalidad: [
+            {
+              type: `concreta`,
+              title: `Fiscalidad inmobiliaria, SOCIMIS y pisos turísticos`,
+              detail: `IVA al 21 % a pisos turísticos; cuadruplicar IRPF por rentas imputadas de viviendas vacías más impuesto estatal equivalente al recargo IBI; gravamen al flipping inmobiliario (<2 años); impuesto estatal al patrimonio inmobiliario de empresas sin mínimo exento; fin del régimen fiscal de SOCIMIS; supresión de deducciones en IRPF a caseros y progresividad en IBI por nº de viviendas.`,
+              trace: `podemos_2026.pdf · Medidas 53 a 59`
+            },
+            {
+              type: `concreta`,
+              title: `Fin de exención IBI a la Iglesia, fraude fiscal y REF canario`,
+              detail: `Suprimir exención del IBI de la Iglesia Católica; ampliar efectivos de Agencia Tributaria a la media europea centrados en grandes fortunas; prohibir contratación pública con empresas en guaridas fiscales (Listado de Baja Tributación); reforma progresiva del REF en Canarias (donde pymes/autónomos tributan ~20 % y grandes empresas hasta 4 %).`,
+              trace: `podemos_2026.pdf · Medidas 52, 60, 61 y 63`
+            }
+          ],
+          vivienda: [
+            {
+              type: `concreta`,
+              title: `Rebaja legal del 40 % en alquileres y contratos indefinidos`,
+              detail: `Reducción extraordinaria del 40 % en contratos vigentes, prórrogas y nuevos contratos (con suelo en el 60 % del precio medio zonal; o 60 % inicial si nunca estuvo alquilada). Conversión por defecto de todos los contratos de vivienda habitual en duración indefinida.`,
+              trace: `podemos_2026.pdf · Medidas 1 y 2`
+            },
+            {
+              type: `concreta`,
+              title: `Prohibición de compra no residencial y expropiación de uso a grandes tenedores`,
+              detail: `Prohibir compra de viviendas que no sean para residencia habitual (comprador o familiar 2º grado) o 2ª residencia de uso propio durante 4 años, con límites en territorios insulares a no residentes; expropiación de uso de viviendas que superen 10 inmuebles en manos de grandes tenedores, bancos y fondos (~626.000 viviendas).`,
+              trace: `podemos_2026.pdf · Medidas 3 y 4`
+            }
+          ],
+          empleo: [
+            {
+              type: `concreta`,
+              title: `Ley Kellys, acceso más rápido al paro y democracia sindical`,
+              detail: `Extender condiciones de la empresa principal a contratistas y subcontratistas; cómputo de 1 mes de paro por cada 2 meses cotizados; elecciones sindicales en cualquier empresa con colegio único, sin mínimo de votos y 3 meses de antigüedad; delegados provinciales; prevalencia del convenio sectorial favorable; Ley Orgánica del Derecho a la Huelga derogando el RD 17/1977 y prohibiendo listas negras.`,
+              trace: `podemos_2026.pdf · Medidas 121, 122, 123 y 124`
+            }
+          ],
+          sanidad: [
+            {
+              type: `concreta`,
+              title: `2.900 €/hab (~8 % PIB), fondo estatal y Ley de Calidad del SNS`,
+              detail: `Subir financiación sanitaria desde 2.247 € hasta mínimo 2.900 €/hab·año (~8 % PIB) mediante fondo estatal cofinanciado (1 € autonómico por cada 2 € estatales) destinado solo a gestión pública directa: ≥30 % del fondo a Primaria (mínimo 25 % del total sanitario) y ≥20 % a salud mental. Ley de Calidad con subida salarial inicial del 20 % a categorías bajas y ratios mínimas obligatorias.`,
+              trace: `podemos_2026.pdf · Medidas 302 y 303`
+            }
+          ],
+          educacion: [
+            {
+              type: `concreta`,
+              title: `7 % del PIB en educación pública directa e Infantil 0–3 universal`,
+              detail: `Fondo estatal exclusivo para enseñanza pública directa (sin concertada, con cofinanciación autonómica 1 € por cada 2 €) hacia un 7 % del PIB; doble cómputo en ratio por alumno NEAE; en 0–3 años, cobertura universal, gratuita y pública directa en máximo 4 años paralizando nuevas licencias privadas y dignificando salarios.`,
+              trace: `podemos_2026.pdf · Medidas previa a 281, 281 y 282`
+            }
+          ],
+          pensiones: [],
+          inmigracion: [
+            {
+              type: `concreta`,
+              title: `Derogación de Ley de Extranjería, cierre de CIE y DNI/voto`,
+              detail: `Derogar LO 4/2000 eliminando devoluciones en caliente; cerrar todos los CIE; DNI español y derecho al voto para quien vive y trabaja en España; reforma del art. 22 CC reduciendo plazo de nacionalidad a 1 año con arraigo; regularización integral de menores no acompañados; alojamiento obligatorio para temporeros; prohibir identificaciones por perfil racial como delito de odio (reforma LO 2/1986 y Ley 4/2015).`,
+              trace: `podemos_2026.pdf · Medidas 205, 206 y 207`
+            }
+          ],
+          seguridad: [
+            {
+              type: `concreta`,
+              title: `Registro documental obligatorio de identificaciones policiales`,
+              detail: `Modificación de LO 2/1986 y Ley 4/2015 para implantar protocolos públicos, registro documental obligatorio de identificaciones y supervisión independiente contra el perfilado racial.`,
+              trace: `podemos_2026.pdf · Medida 207 (último subapartado)`
+            }
+          ],
+          territorial: [
+            {
+              type: `concreta`,
+              title: `Cofinanciación estatal condicionada y reparto por despoblación`,
+              detail: `Fondos estatales en educación y sanidad con reparto según población, coste en zonas despobladas y regla de cofinanciación (1 € autonómico por 2 € estatales), fijando parámetros mínimos obligatorios en todo el país y reforma específica del REF canario.`,
+              trace: `podemos_2026.pdf · Medidas 63, 281, 302 y 303`
+            }
+          ],
+          energia: [],
+          derechos: [
+            {
+              type: `concreta`,
+              title: `Violencia machista ampliada, violencia obstétrica y derechos reproductivos`,
+              detail: `Protección frente a violencia vicaria desterrando el «síndrome de alienación parental»; ampliar definición de violencia machista (Convenio de Estambul, digital y política); incluir violencia obstétrica en Ley 1/2023; Ley de lactancia; anticonceptivos gratuitos (incluyendo urgencia); reproducción asistida pública sin exclusión por orientación, identidad trans o hijo previo; acceso libre a ligadura de trompas y freno a gestación subrogada.`,
+              trace: `podemos_2026.pdf · Medidas 162 a 168`
+            }
+          ]
+        }
+      },
+      {
+        id: `psoe`,
+        name: `PSOE`,
+        file: `psoe_2026.pdf`,
+        scopeNote: `El extracto recoge la introducción económica, el programa de vivienda TU CASA, un compromiso de educación infantil (11557) y el bloque energético 235–245.`,
+        topics: {
+          economia: [
+            {
+              type: `declarativa`,
+              title: `Crecimiento basado en digitalización, IA y transición energética`,
+              detail: `Aumentar la productividad aprovechando digitalización, transición energética e inteligencia artificial, reforzando capacidades industriales verdes (bienes de equipo renovables, almacenamiento y acero verde) mediante I+D y compra pública innovadora.`,
+              trace: `psoe_2026.pdf · Modelo económico para el crecimiento y Medida 243`
+            }
+          ],
+          fiscalidad: [
+            {
+              type: `declarativa`,
+              title: `Fiscalidad verde y aportación de ultrarricos y grandes empresas`,
+              detail: `Expresa el objetivo de que «ultrarricos y grandes empresas paguen los impuestos que les toca» y reorientar la fiscalidad para la transición ecológica eliminando barreras a tecnologías limpias; sin tipos impositivos concretos en el extracto.`,
+              trace: `psoe_2026.pdf · Introducción económica y Medida 241`
+            }
+          ],
+          vivienda: [
+            {
+              type: `concreta`,
+              title: `Programa TU CASA (10.000 M€) y ayudas a juventud y medio rural`,
+              detail: `Programa TU CASA dotado con 10.000 millones € con préstamos de hasta 50.000 € sin intereses para compra de primera vivienda; ayudas al alquiler y deducciones en renta; rehabilitación en cascos históricos rurales y cesión a administraciones para alquiler.`,
+              trace: `psoe_2026.pdf · Bloque de vivienda y juventud`
+            }
+          ],
+          empleo: [
+            {
+              type: `declarativa`,
+              title: `Recualificación para empleos verdes y FP Dual`,
+              detail: `Formar y recualificar a trabajadores para empleos verdes reforzando la FP Dual y programas de capacitación permanente.`,
+              trace: `psoe_2026.pdf · Medida 244`
+            }
+          ],
+          sanidad: [],
+          educacion: [
+            {
+              type: `declarativa`,
+              title: `Universalización de la educación de 0 a 3 años`,
+              detail: `Promover inclusión plena de la etapa 0–3 aumentando progresivamente escuelas infantiles públicas, reduciendo alumnos por aula y mejorando espacios; sin cifra presupuestaria ni plazo cerrado en el extracto.`,
+              trace: `psoe_2026.pdf · Compromiso 11557 (Educación Infantil, Primaria, Secundaria y Bachillerato)`
+            }
+          ],
+          pensiones: [],
+          inmigracion: [],
+          seguridad: [],
+          territorial: [],
+          energia: [
+            {
+              type: `concreta`,
+              title: `Zonas de Aceleración Renovable, cierre nuclear 2035 e hidrógeno verde`,
+              detail: `Despliegue renovable para 2030 en Zonas de Aceleración Renovable; bombeo hidroeléctrico y hoja de ruta de abandono progresivo de combustibles fósiles; red troncal de gasoductos de hidrógeno verde e interconexiones con Francia; reforma del mercado eléctrico europeo; mantenimiento del calendario de cierre nuclear hasta 2035; Plan Social para el Clima y nueva Ley de Minas.`,
+              trace: `psoe_2026.pdf · Medidas 234 (final) a 245`
+            }
+          ],
+          derechos: []
+        }
+      },
+      {
+        id: `vox`,
+        name: `Vox`,
+        file: `vox_2026.pdf`,
+        scopeNote: `ATENCIÓN DOCUMENTAL: el extracto de vox_2026.pdf únicamente contiene la portada y el Índice con títulos de capítulo y números de página, sin el texto desarrollado de las propuestas.`,
+        topics: {
+          economia: [
+            {
+              type: `declarativa`,
+              title: `Bloques anunciados en índice sin desarrollo en el extracto`,
+              detail: `El índice incluye «Economía, industria y energía» (pág. 7), «Desregulación» (pág. 23) y «Sector primario y Mundo rural» (pág. 28). El extracto disponible no reproduce ninguna medida concreta, cifra ni mecanismo.`,
+              trace: `vox_2026.pdf · Índice (págs. 7, 23 y 28 — solo título en extracto)`
+            }
+          ],
+          fiscalidad: [],
+          vivienda: [
+            {
+              type: `declarativa`,
+              title: `Capítulo «Vivienda» anunciado sin texto desarrollado`,
+              detail: `Listado en el índice en la pág. 19; sin propuestas ni desarrollo en el extracto disponible.`,
+              trace: `vox_2026.pdf · Índice (pág. 19 — solo título en extracto)`
+            }
+          ],
+          empleo: [],
+          sanidad: [
+            {
+              type: `declarativa`,
+              title: `Capítulo «Sanidad» anunciado sin texto desarrollado`,
+              detail: `Listado en el índice en la pág. 32; sin propuestas ni desarrollo en el extracto disponible.`,
+              trace: `vox_2026.pdf · Índice (pág. 32 — solo título en extracto)`
+            }
+          ],
+          educacion: [
+            {
+              type: `declarativa`,
+              title: `Capítulo «Educación, Cultura y Deporte» anunciado sin texto`,
+              detail: `Listado en el índice en la pág. 35; sin propuestas ni desarrollo en el extracto disponible.`,
+              trace: `vox_2026.pdf · Índice (pág. 35 — solo título en extracto)`
+            }
+          ],
+          pensiones: [],
+          inmigracion: [
+            {
+              type: `declarativa`,
+              title: `Capítulos «Inmigración» y «Prioridad nacional» sin desarrollo`,
+              detail: `Listados en el índice en las págs. 13 y 16; el extracto disponible no contiene el texto ni las medidas de ambos capítulos.`,
+              trace: `vox_2026.pdf · Índice (págs. 13 y 16 — solo títulos en extracto)`
+            }
+          ],
+          seguridad: [
+            {
+              type: `declarativa`,
+              title: `Capítulos «Seguridad y Defensa» y «Justicia» sin desarrollo`,
+              detail: `Listados en el índice en las págs. 39 («Seguridad y Defensa») y 48 («Independencia de la Justicia y lucha contra la corrupción»); sin contenido desarrollado en el extracto.`,
+              trace: `vox_2026.pdf · Índice (págs. 39 y 48 — solo títulos en extracto)`
+            }
+          ],
+          territorial: [
+            {
+              type: `declarativa`,
+              title: `Capítulo específico «Ceuta y Melilla» anunciado sin desarrollo`,
+              detail: `Listado como primer capítulo en el índice (pág. 5); sin medidas ni texto desarrollado en el extracto.`,
+              trace: `vox_2026.pdf · Índice (pág. 5 — solo título en extracto)`
+            }
+          ],
+          energia: [
+            {
+              type: `declarativa`,
+              title: `Energía incluida en título de capítulo sin desarrollo`,
+              detail: `Mencionada en «Economía, industria y energía» (pág. 7); sin texto ni propuestas en el extracto.`,
+              trace: `vox_2026.pdf · Índice (pág. 7 — solo título en extracto)`
+            }
+          ],
+          derechos: [
+            {
+              type: `declarativa`,
+              title: `Capítulo «Familia y Vida» anunciado sin texto desarrollado`,
+              detail: `Listado en el índice en la pág. 44; sin propuestas ni explicación en el extracto.`,
+              trace: `vox_2026.pdf · Índice (pág. 44 — solo título en extracto)`
+            }
+          ]
+        }
+      }
+    ];
+
+    const DEBATE_AXES = [
+      {
+        id: `eje-vivienda`,
+        title: `Acceso a la vivienda: intervención de rentas frente a estímulo de compra y oferta`,
+        tag: `Vivienda y Fiscalidad`,
+        hasConflict: true,
+        hasConsensus: true,
+        positions: [
+          {
+            kind: `coincidencia`,
+            label: `Objetivo común declarado`,
+            parties: `Podemos · PSOE · Frente Amplio · PNV`,
+            text: `Los cuatro textos identifican la dificultad de acceso y la necesidad de ampliar el alquiler asequible o movilizar viviendas vacías (el extracto de Vox solo cita el título «Vivienda», pág. 19).`
+          },
+          {
+            kind: `divergencia`,
+            label: `Mecanismos contrapuestos`,
+            parties: `Podemos vs. PSOE vs. PNV`,
+            text: `Podemos plantea rebajar por ley los alquileres un 40 %, contratos indefinidos, prohibir la compra no residencial durante 4 años y expropiar el uso de ~626.000 viviendas a grandes tenedores (>10 inmuebles). El PSOE prioriza préstamos sin intereses de hasta 50.000 € (TU CASA, 10.000 M€) para compra de primera vivienda y cesión voluntaria para alquiler rural. El PNV apuesta por más construcción/rehabilitación dando seguridad jurídica a propietarios. Frente Amplio elimina la bonificación del 40 % en Sociedades al alquiler no asequible.`
+          }
+        ],
+        incompatibility: `Incompatibilidad normativa y económica directa: la prohibición de compra de viviendas que no sean para uso propio (Podemos, Medida 3) y la expropiación de uso a grandes tenedores (Medida 4) chocan con un modelo basado en incentivar la oferta privada mediante seguridad jurídica al propietario (PNV) y préstamos a la compraventa en el mercado libre (PSOE, TU CASA).`
+      },
+      {
+        id: `eje-sanidad`,
+        title: `Sanidad pública: gestión directa exclusiva, suelos de gasto y conciertos`,
+        tag: `Sanidad`,
+        hasConflict: true,
+        hasConsensus: true,
+        positions: [
+          {
+            kind: `coincidencia`,
+            label: `Coincidencia cuantificada en Atención Primaria`,
+            parties: `Adelante Andalucía · Frente Amplio · Podemos`,
+            text: `Los tres fijan exactamente el 25 % del presupuesto sanitario total como suelo mínimo para Atención Primaria (Podemos añade ≥30 % del nuevo fondo estatal). Frente Amplio y Podemos convergen además en un gasto público total en torno al 8 % del PIB.`
+          },
+          {
+            kind: `divergencia`,
+            label: `Relación con la sanidad privada concertada`,
+            parties: `Frente Amplio y Podemos vs. Adelante Andalucía`,
+            text: `Frente Amplio (derogación de Ley 15/1997 e internalización paulatina) y Podemos (veto a destinar el nuevo fondo estatal de 2.900 €/hab a servicios privatizados) buscan eliminar la gestión indirecta. Adelante Andalucía, en cambio, crea un impuesto permanente sobre los beneficios que la sanidad privada obtiene de los conciertos públicos para financiar investigación contra el cáncer.`
+          }
+        ],
+        incompatibility: `Fricción técnica de diseño: si se internalizan y suprimen por completo los conciertos sanitarios privados (Frente Amplio / Podemos), la base imponible del impuesto específico de Adelante Andalucía sobre los beneficios de esos conciertos tendería a extinguirse.`
+      },
+      {
+        id: `eje-empleo`,
+        title: `Salarios, jornada laboral y ámbito territorial del SMI`,
+        tag: `Empleo y Modelo territorial`,
+        hasConflict: true,
+        hasConsensus: true,
+        positions: [
+          {
+            kind: `coincidencia`,
+            label: `Protección del poder adquisitivo y condiciones`,
+            parties: `Adelante Andalucía · EH Bildu · Podemos · PNV`,
+            text: `Coinciden en mejorar salarios y estabilidad laboral: Adelante indexa salarios y SMI a la inflación por ley y prohíbe el turno partido; EH Bildu reduce la jornada a 32 h/4 días (35 h inicial en pymes) y restaura 45 días de indemnización y autorización de ERE; Podemos equipara condiciones en subcontratas («Ley Kellys») y facilita el acceso al paro (1 mes cada 2 cotizados); PNV defiende salarios ligados al coste de vida.`
+          },
+          {
+            kind: `divergencia`,
+            label: `Fijación territorial vs. estatal del SMI`,
+            parties: `EH Bildu vs. marco estatal uniforme`,
+            text: `EH Bildu propone reformar el Estatuto de los Trabajadores para que cada comunidad autónoma fije un SMI propio vinculado a la Carta Social Europea por encima del mínimo estatal, mientras Adelante Andalucía propone la indexación legal general del SMI a la inflación.`
+          }
+        ],
+        incompatibility: `Tensión normativa en costes laborales: la coexistencia de un SMI autonómico propio diferenciado (EH Bildu) con una indexación automática uniforme estatal al IPC (Adelante) y reducción de jornada a 32 horas sin rebaja salarial requiere armonizar en el Estatuto de los Trabajadores si el suelo mínimo autonómico se indexa por separado.`
+      },
+      {
+        id: `eje-fiscalidad`,
+        title: `Fiscalidad progresiva, grandes fortunas, energía y tributación verde`,
+        tag: `Fiscalidad`,
+        hasConflict: false,
+        hasConsensus: true,
+        positions: [
+          {
+            kind: `coincidencia`,
+            label: `Mayor carga a rentas altas, multinacionales y vivienda vacía`,
+            parties: `Adelante Andalucía · Frente Amplio · Podemos · PSOE`,
+            text: `Adelante propone gravar grandes fortunas, terratenientes, IRPF >100.000 €, banca y eléctricas; Frente Amplio sube la tasa Google al 15 %, restringe SICAV, grava transacciones financieras (0,1–0,3 %), lujo, minería (+470 M€) y viviendas no habituales; Podemos grava viviendas vacías, flipping (<2 años), patrimonio inmobiliario empresarial, SOCIMIS, elimina exención IBI de la Iglesia y reforma el REF canario; PSOE declara que ultrarricos y grandes empresas deben pagar más.`
+          },
+          {
+            kind: `divergencia`,
+            label: `Fiscalidad de apoyo familiar sin carga progresiva detallada`,
+            parties: `Junts`,
+            text: `Junts menciona medidas fiscales orientadas específicamente a infancia, familias y discapacidad, sin detallar subidas a rentas altas ni nuevos gravámenes en su extracto.`
+          }
+        ],
+        incompatibility: ``
+      },
+      {
+        id: `eje-territorial`,
+        title: `Arquitectura territorial: bilateralidad y transferencias frente a suelos estatales`,
+        tag: `Modelo territorial`,
+        hasConflict: true,
+        hasConsensus: false,
+        positions: [
+          {
+            kind: `divergencia`,
+            label: `Blindaje competencial, bilateralidad y transferencias`,
+            parties: `PNV · BNG · EH Bildu · Junts`,
+            text: `PNV exige rechazar toda recentralización o invasión competencial, establecer mecanismos bilaterales Euskadi–Estado y proteger Derechos Históricos y educación vasca. BNG reclama transferir a Galiza planificación y ejecución de infraestructuras hidráulicas y modificar el Código Civil para el monte comunal. EH Bildu pide competencia autonómica en SMI. Junts exige corresponsabilidad financiera entre administraciones.`
+          },
+          {
+            kind: `divergencia`,
+            label: `Leyes estatales de mínimos obligatorios y fondos condicionados`,
+            parties: `Podemos · Adelante Andalucía · Vox (índice)`,
+            text: `Podemos propone fondos estatales en sanidad y educación con cofinanciación condicionada (1 € autonómico por 2 € estatales) y una Ley de Calidad del SNS con ratios y salarios obligatorios en todo el territorio. Adelante fija suelos de inversión por ley y tiempos máximos en todo el Estado. Vox incluye el capítulo específico «Ceuta y Melilla» (pág. 5), sin texto en el extracto.`
+          }
+        ],
+        incompatibility: `Incompatibilidad competencial directa: fijar por ley estatal parámetros mínimos obligatorios, destinos finalistas de gasto sanitario/educativo y veto a la gestión concertada en todas las comunidades (Podemos, Medidas 281, 302 y 303) entra en colisión jurídica con la prohibición de cualquier invasión o condicionamiento presupuestario estatal sobre competencias autonómicas (PNV, Educación 01 y Competencias 02).`
+      },
+      {
+        id: `eje-energia`,
+        title: `Transición energética, nuclear, renovables y medio marino`,
+        tag: `Energía y Medio Ambiente`,
+        hasConflict: false,
+        hasConsensus: true,
+        positions: [
+          {
+            kind: `coincidencia`,
+            label: `Impulso renovable con compensación territorial y control ambiental`,
+            parties: `PSOE · Frente Amplio · BNG`,
+            text: `PSOE mantiene cierre nuclear hasta 2035, impulsa Zonas de Aceleración Renovable 2030, hidrógeno verde hacia Francia y nueva Ley de Minas. Frente Amplio baja al 0 % el impuesto a producción renovable, grava la especulación de permisos renovables y compensa «zonas de sacrificio ambiental». BNG exige inspeccionar 140.000 t de residuos nucleares en la Foxa Atlántica y derogar la prórroga de ENCE.`
+          },
+          {
+            kind: `divergencia`,
+            label: `Matiz sobre el impacto de grandes parques y minería`,
+            parties: `Frente Amplio vs. PSOE`,
+            text: `Mientras el PSOE acelera la red troncal de hidrógeno, almacenamiento y nueva Ley de Minas, Frente Amplio grava con >470 M€ anuales las externalidades de unas 2.800 explotaciones mineras extractivas e introduce compensaciones específicas por impactos negativos de grandes parques eólicos y fotovoltaicos.`
+          }
+        ],
+        incompatibility: ``
+      },
+      {
+        id: `eje-inmigracion`,
+        title: `Modelo migratorio, derechos de residencia y cobertura universal`,
+        tag: `Inmigración y Seguridad`,
+        hasConflict: false,
+        hasConsensus: true,
+        positions: [
+          {
+            kind: `coincidencia`,
+            label: `Universalidad sanitaria con independencia del estatus administrativo`,
+            parties: `Frente Amplio · Podemos`,
+            text: `Frente Amplio blinda por ley la atención sanitaria universal para residentes independientemente de su estatus administrativo; Podemos deroga la Ley de Extranjería (LO 4/2000), cierra los CIE, otorga DNI y voto a quien vive y trabaja en España, reduce nacionalidad a 1 año por arraigo y prohíbe identificaciones por perfil racial.`
+          },
+          {
+            kind: `divergencia`,
+            label: `Referencia en índice sin contenido contrastable`,
+            parties: `Vox`,
+            text: `El índice de vox_2026.pdf titula los capítulos «Inmigración» (pág. 13) y «Prioridad nacional» (pág. 16), pero el extracto no contiene ninguna propuesta desarrollada que permita verificar su contenido.`
+          }
+        ],
+        incompatibility: ``
+      },
+      {
+        id: `eje-educacion-derechos`,
+        title: `Educación 0–3, cuidados y derechos reproductivos`,
+        tag: `Educación y Derechos sociales`,
+        hasConflict: true,
+        hasConsensus: true,
+        positions: [
+          {
+            kind: `coincidencia`,
+            label: `Expansión de la educación infantil pública 0–3 años`,
+            parties: `PSOE · Podemos`,
+            text: `PSOE compromete universalizar la etapa 0–3 ampliando escuelas infantiles públicas y bajando ratios (11557). Podemos fija un plazo máximo de 4 años para cobertura universal, gratuita y de gestión pública directa, paralizando licencias privadas.`
+          },
+          {
+            kind: `divergencia`,
+            label: `Financiación concertada y alcance de derechos`,
+            parties: `Podemos · Junts · PNV · Vox (índice)`,
+            text: `Podemos veta financiar enseñanza privada-concertada con el nuevo fondo hacia el 7 % del PIB y desarrolla medidas sobre violencia vicaria, violencia obstétrica, anticonceptivos gratuitos y reproducción asistida para mujeres lesbianas, bisexuales y personas trans. Junts se centra en dependencia, cuidados, renta garantizada y familias; PNV en educación plurilingüe bajo competencia vasca; Vox lista «Familia y Vida» (pág. 44) sin desarrollo en el extracto.`
+          }
+        ],
+        incompatibility: `Incompatibilidad operativa en 0–3 años: la paralización de nuevas licencias privadas y absorción voluntaria hacia gestión pública directa exclusiva (Podemos, Medida 281) difiere de un modelo mixto de ampliación progresiva sin prohibición expresa del sector privado (PSOE, 11557).`
+      }
+    ];
+
+    let currentView = 'mapa';
+    let selectedPartyId = PARTIES[0].id;
+    let visibleMatrixParties = PARTIES.map(function (p) { return p.id; });
+    let expandedBranches = {};
+
+    function countStats() {
+      let concrete = 0;
+      let general = 0;
+      PARTIES.forEach(function (p) {
+        TOPICS.forEach(function (t) {
+          const list = p.topics[t.id] || [];
+          list.forEach(function (m) {
+            if (m.type === 'concreta') concrete += 1;
+            else general += 1;
+          });
+        });
+      });
+      const kpiC = document.getElementById('kpi-concrete');
+      const kpiG = document.getElementById('kpi-general');
+      if (kpiC) kpiC.textContent = String(concrete);
+      if (kpiG) kpiG.textContent = String(general);
+    }
+
+    function getPartyTopicStats(party) {
+      let concreta = 0;
+      let declarativa = 0;
+      let vacio = 0;
+      TOPICS.forEach(function (t) {
+        const list = party.topics[t.id] || [];
+        if (list.length === 0) {
+          vacio += 1;
+        } else if (list.some(function (m) { return m.type === 'concreta'; })) {
+          concreta += 1;
+        } else {
+          declarativa += 1;
+        }
+      });
+      return { concreta: concreta, declarativa: declarativa, vacio: vacio };
+    }
+
+    function switchView(viewName) {
+      currentView = viewName;
+      const views = ['mapa', 'matriz', 'ejes'];
+      views.forEach(function (v) {
+        const sec = document.getElementById('view-' + v);
+        const btn = document.getElementById('tab-' + v);
+        if (sec) sec.hidden = (v !== viewName);
+        if (btn) {
+          if (v === viewName) btn.classList.add('active');
+          else btn.classList.remove('active');
+        }
+      });
+    }
+
+    function selectParty(partyId) {
+      selectedPartyId = partyId;
+      renderPartyList();
+      renderConceptCanvas();
+    }
+
+    function toggleBranch(partyId, topicId) {
+      const key = partyId + ':' + topicId;
+      expandedBranches[key] = !expandedBranches[key];
+      renderConceptCanvas();
+    }
+
+    function setAllBranches(expand) {
+      TOPICS.forEach(function (t) {
+        expandedBranches[selectedPartyId + ':' + t.id] = expand;
+      });
+      renderConceptCanvas();
+    }
+
+    function renderPartyList() {
+      const container = document.getElementById('party-tree-list');
+      if (!container) return;
+      container.innerHTML = PARTIES.map(function (p) {
+        const st = getPartyTopicStats(p);
+        const isActive = p.id === selectedPartyId;
+        const pctC = (st.concreta / 12) * 100;
+        const pctD = (st.declarativa / 12) * 100;
+        const pctV = (st.vacio / 12) * 100;
+        return `
+          <button type="button" class="party-node-btn ${isActive ? 'active' : ''}" onclick="selectParty('${p.id}')" aria-pressed="${isActive ? 'true' : 'false'}">
+            <div class="party-node-head">
+              <span class="party-node-name">${p.name}</span>
+              <span class="badge ${st.concreta > 0 ? 'badge-concreta' : 'badge-declarativa'}">${st.concreta}/12 concretas</span>
+            </div>
+            <span class="party-node-source">${p.file}</span>
+            <div class="party-node-bars" aria-hidden="true">
+              <div class="bar-seg-concreta" style="width: ${pctC}%"></div>
+              <div class="bar-seg-declarativa" style="width: ${pctD}%"></div>
+              <div class="bar-seg-vacio" style="width: ${pctV}%"></div>
+            </div>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function renderConceptCanvas() {
+      const canvas = document.getElementById('concept-canvas');
+      if (!canvas) return;
+      const party = PARTIES.find(function (p) { return p.id === selectedPartyId; }) || PARTIES[0];
+      const st = getPartyTopicStats(party);
+
+      const branchesHtml = TOPICS.map(function (t) {
+        const items = party.topics[t.id] || [];
+        const key = party.id + ':' + t.id;
+        if (typeof expandedBranches[key] === 'undefined') {
+          expandedBranches[key] = items.length > 0;
+        }
+        const isOpen = expandedBranches[key];
+        const hasConcrete = items.some(function (m) { return m.type === 'concreta'; });
+        let badgeHtml = `<span class="badge badge-sin-datos">No abordada</span>`;
+        if (items.length > 0) {
+          badgeHtml = hasConcrete
+            ? `<span class="badge badge-concreta">${items.length} concreta(s)</span>`
+            : `<span class="badge badge-declarativa">Declaración / índice</span>`;
+        }
+
+        let bodyContent = '';
+        if (items.length === 0) {
+          bodyContent = `
+            <div class="measure-item is-vacio">
+              El extracto disponible de <strong>${party.file}</strong> no contiene propuestas ni referencias sobre ${t.label.toLowerCase()}.
+            </div>
+          `;
+        } else {
+          bodyContent = items.map(function (m) {
+            const cls = m.type === 'concreta' ? '' : 'is-declarativa';
+            const typeBadge = m.type === 'concreta'
+              ? `<span class="badge badge-concreta">Propuesta concreta</span>`
+              : `<span class="badge badge-declarativa">Declaración / sin desarrollo</span>`;
+            return `
+              <div class="measure-item ${cls}">
+                <div class="measure-head">
+                  <span class="measure-title">${m.title}</span>
+                  ${typeBadge}
+                </div>
+                <div>${m.detail}</div>
+                <span class="trace-tag">Fuente: ${m.trace}</span>
+              </div>
+            `;
+          }).join('');
+        }
+
+        return `
+          <div class="branch-card">
+            <button type="button" class="branch-trigger" onclick="toggleBranch('${party.id}', '${t.id}')" aria-expanded="${isOpen ? 'true' : 'false'}">
+              <span class="branch-title">${isOpen ? '▾' : '▸'} ${t.label}</span>
+              ${badgeHtml}
+            </button>
+            <div class="branch-body" ${isOpen ? '' : 'hidden'}>
+              ${bodyContent}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      canvas.innerHTML = `
+        <div class="tree-root-header">
+          <div>
+            <span class="dossier-meta">Nodo principal · ${party.file}</span>
+            <h3 class="section-title">${party.name}</h3>
+            <p class="section-desc">${party.scopeNote}</p>
+            <p class="figure-note">Resumen de ramas: ${st.concreta} con medidas concretas · ${st.declarativa} con mención general/índice · ${st.vacio} sin contenido en el extracto.</p>
+          </div>
+          <div class="tree-actions">
+            <button type="button" class="btn-secondary" onclick="setAllBranches(true)">Desplegar 12 ramas</button>
+            <button type="button" class="btn-secondary" onclick="setAllBranches(false)">Contraer ramas</button>
+          </div>
+        </div>
+        <div class="branch-grid">${branchesHtml}</div>
+      `;
+    }
+
+    function populateMatrixControls() {
+      const sel = document.getElementById('filter-topic');
+      if (sel) {
+        TOPICS.forEach(function (t) {
+          const opt = document.createElement('option');
+          opt.value = t.id;
+          opt.textContent = t.label;
+          sel.appendChild(opt);
+        });
+      }
+      renderPartyChips();
+    }
+
+    function renderPartyChips() {
+      const bar = document.getElementById('matrix-party-chips');
+      if (!bar) return;
+      bar.innerHTML = `<span class="control-label">Partidos visibles:</span>` + PARTIES.map(function (p) {
+        const active = visibleMatrixParties.indexOf(p.id) !== -1;
+        return `
+          <button type="button" class="party-chip ${active ? 'selected' : ''}" onclick="toggleMatrixParty('${p.id}')" aria-pressed="${active ? 'true' : 'false'}">
+            ${active ? '✓' : '+'} ${p.name}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function toggleMatrixParty(partyId) {
+      const idx = visibleMatrixParties.indexOf(partyId);
+      if (idx !== -1) {
+        if (visibleMatrixParties.length === 1) return;
+        visibleMatrixParties.splice(idx, 1);
+      } else {
+        visibleMatrixParties.push(partyId);
+      }
+      renderPartyChips();
+      renderMatrix();
+    }
+
+    function resetMatrixFilters() {
+      const topicEl = document.getElementById('filter-topic');
+      const typeEl = document.getElementById('filter-type');
+      const searchEl = document.getElementById('filter-search');
+      if (topicEl) topicEl.value = 'all';
+      if (typeEl) typeEl.value = 'all';
+      if (searchEl) searchEl.value = '';
+      visibleMatrixParties = PARTIES.map(function (p) { return p.id; });
+      renderPartyChips();
+      renderMatrix();
+    }
+
+    function renderMatrix() {
+      const topicEl = document.getElementById('filter-topic');
+      const typeEl = document.getElementById('filter-type');
+      const searchEl = document.getElementById('filter-search');
+      const headEl = document.getElementById('matrix-head');
+      const bodyEl = document.getElementById('matrix-body');
+      const statusEl = document.getElementById('matrix-status');
+      if (!headEl || !bodyEl) return;
+
+      const topicFilter = topicEl ? topicEl.value : 'all';
+      const typeFilter = typeEl ? typeEl.value : 'all';
+      const query = searchEl ? searchEl.value.trim().toLowerCase() : '';
+
+      const activeParties = PARTIES.filter(function (p) {
+        return visibleMatrixParties.indexOf(p.id) !== -1;
+      });
+
+      headEl.innerHTML = `
+        <tr>
+          <th scope="col">Materia</th>
+          ${activeParties.map(function (p) {
+            return `<th scope="col">${p.name}<br><span style="font-weight:400;text-transform:none;">${p.file}</span></th>`;
+          }).join('')}
+        </tr>
+      `;
+
+      const filteredTopics = TOPICS.filter(function (t) {
+        return topicFilter === 'all' || t.id === topicFilter;
+      });
+
+      let renderedRows = 0;
+      const rowsHtml = filteredTopics.map(function (t) {
+        let rowHasMatch = false;
+        const cellsHtml = activeParties.map(function (p) {
+          const allItems = p.topics[t.id] || [];
+          if (typeFilter === 'sin_datos') {
+            if (allItems.length === 0 && (!query || t.label.toLowerCase().indexOf(query) !== -1)) {
+              rowHasMatch = true;
+              return `<td><div class="cell-empty">Sin propuestas sobre esta materia en el extracto de ${p.file}.</div></td>`;
+            }
+            return `<td><div class="cell-empty">—</div></td>`;
+          }
+
+          const items = allItems.filter(function (m) {
+            const typeOk = (typeFilter === 'all') || (m.type === typeFilter);
+            const textOk = !query || (
+              m.title.toLowerCase().indexOf(query) !== -1 ||
+              m.detail.toLowerCase().indexOf(query) !== -1 ||
+              m.trace.toLowerCase().indexOf(query) !== -1 ||
+              t.label.toLowerCase().indexOf(query) !== -1
+            );
+            return typeOk && textOk;
+          });
+
+          if (items.length === 0) {
+            if (allItems.length === 0 && !query && typeFilter === 'all') {
+              rowHasMatch = true;
+              return `<td><span class="badge badge-sin-datos">No abordada en extracto</span><p class="cell-empty">El texto disponible de ${p.file} no contiene medidas en ${t.label.toLowerCase()}.</p></td>`;
+            }
+            return `<td><div class="cell-empty">Sin coincidencias con el filtro activo.</div></td>`;
+          }
+
+          rowHasMatch = true;
+          const entries = items.map(function (m) {
+            const badge = m.type === 'concreta'
+              ? `<span class="badge badge-concreta">Concreta</span>`
+              : `<span class="badge badge-declarativa">Declaración / índice</span>`;
+            return `
+              <div class="cell-entry">
+                ${badge}
+                <div class="measure-title" style="margin-top:0.25rem;">${m.title}</div>
+                <div>${m.detail}</div>
+                <span class="trace-tag">${m.trace}</span>
+              </div>
+            `;
+          }).join('');
+          return `<td><div class="cell-stack">${entries}</div></td>`;
+        }).join('');
+
+        if (!rowHasMatch && (query || typeFilter !== 'all')) return '';
+        renderedRows += 1;
+        return `<tr><th scope="row" style="position:sticky;left:0;background:var(--surface-container);border-right:var(--section-rule);text-align:left;padding:var(--space-md);vertical-align:top;">${t.label}</th>${cellsHtml}</tr>`;
+      }).join('');
+
+      bodyEl.innerHTML = rowsHtml || `<tr><td colspan="${activeParties.length + 1}" style="padding:var(--space-lg);">No existen propuestas que coincidan con la búsqueda «${query}». Prueba con otro término o restablece los filtros.</td></tr>`;
+
+      if (statusEl) {
+        statusEl.textContent = `Mostrando ${renderedRows} materia(s) × ${activeParties.length} partido(s)`;
+      }
+    }
+
+    function renderCoverageChart() {
+      const container = document.getElementById('coverage-chart');
+      if (!container) return;
+      container.innerHTML = PARTIES.map(function (p) {
+        const st = getPartyTopicStats(p);
+        const wC = (st.concreta / 12) * 100;
+        const wD = (st.declarativa / 12) * 100;
+        const wV = (st.vacio / 12) * 100;
+        return `
+          <div class="coverage-row">
+            <strong>${p.name}</strong>
+            <div class="cov-bar-track" title="${p.name}: ${st.concreta} concretas, ${st.declarativa} generales/índice, ${st.vacio} sin datos">
+              <div class="bar-seg-concreta" style="width:${wC}%"></div>
+              <div class="bar-seg-declarativa" style="width:${wD}%"></div>
+              <div class="bar-seg-vacio" style="width:${wV}%"></div>
+            </div>
+            <span class="cov-val">${st.concreta + st.declarativa}/12</span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderAxes() {
+      const sel = document.getElementById('filter-axis-type');
+      const grid = document.getElementById('axes-grid');
+      if (!grid) return;
+      const mode = sel ? sel.value : 'all';
+
+      const filtered = DEBATE_AXES.filter(function (ax) {
+        if (mode === 'incompatibilidad') return ax.hasConflict;
+        if (mode === 'coincidencia') return ax.hasConsensus;
+        return true;
+      });
+
+      grid.innerHTML = filtered.map(function (ax) {
+        const badges = [];
+        if (ax.hasConsensus) badges.push(`<span class="badge badge-coincidencia">Coincidencias</span>`);
+        if (ax.hasConflict) badges.push(`<span class="badge badge-incompatibilidad">Incompatibilidad</span>`);
+
+        const stancesHtml = ax.positions.map(function (pos) {
+          const badgeCls = pos.kind === 'coincidencia' ? 'badge-coincidencia' : 'badge-divergencia';
+          return `
+            <div class="stance-row">
+              <span class="badge ${badgeCls}">${pos.label}</span>
+              <div class="stance-parties" style="margin-top:0.25rem;">${pos.parties}</div>
+              <div style="margin-top:0.25rem;font-size:0.875rem;">${pos.text}</div>
+            </div>
+          `;
+        }).join('');
+
+        const incompatHtml = ax.incompatibility
+          ? `<div class="incompat-box"><span class="incompat-title">Incompatibilidad técnica o normativa detectada</span>${ax.incompatibility}</div>`
+          : '';
+
+        return `
+          <article class="axis-card">
+            <div class="axis-header">
+              <div>
+                <span class="dossier-meta">${ax.tag}</span>
+                <h3 class="axis-title">${ax.title}</h3>
+              </div>
+              <div style="display:flex;gap:0.25rem;flex-wrap:wrap;">${badges.join('')}</div>
+            </div>
+            ${stancesHtml}
+            ${incompatHtml}
+          </article>
+        `;
+      }).join('');
+    }
+
+    function initApp() {
+      countStats();
+      renderPartyList();
+      renderConceptCanvas();
+      populateMatrixControls();
+      renderMatrix();
+      renderCoverageChart();
+      renderAxes();
+    }
+
+    document.addEventListener('DOMContentLoaded', initApp);
+  </script>
+</body>
+</html>
